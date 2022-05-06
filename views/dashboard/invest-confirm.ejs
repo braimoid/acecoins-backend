@@ -1,0 +1,34 @@
+<!-- @@ Invest Modal @e -->
+<% include ../partials/header %>
+<!-- @@ Confirm Invest Modal @e -->
+<div class="" tabindex="-1" id="confirm-invest">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+      <div class="modal-body modal-body-lg text-center">
+        <div class="nk-modal">
+          <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-check bg-success"></em>
+          <h4 class="nk-modal-title">Successfully sent payment!</h4>
+          <div class="nk-modal-text">
+            <p class="sub-text">You have successfully order the Investment Plan of ‘<%=plan%>’ with amount of
+              <strong>$<%=amount%></strong> using your <strong>Acecoins Wallet</strong>.</p>
+          </div>
+          <div class="nk-modal-action-lg">
+            <ul class="btn-group flex-wrap justify-center g-4">
+              <li><a href="/invest" class="btn btn-lg btn-mw btn-primary">More Invest</a></li>
+              <li><a href="/investment/<%=id%>" class="btn btn-lg btn-mw btn-dim btn-primary"><em
+                    class="icon ni ni-reports"></em><span>See the plan</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- .modal-body -->
+      <div class="modal-footer bg-lighter">
+        <div class="text-center w-100">
+          <p>Earn upto $200 for each friend your refer! <a href="/dashboard">Invite friends</a></p>
+        </div>
+      </div>
+    </div><!-- .modal-content -->
+  </div><!-- .modla-dialog -->
+</div><!-- .modal -->
+
+<%include ../partials/footer %>

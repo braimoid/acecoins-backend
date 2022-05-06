@@ -1,0 +1,43 @@
+.pricing-section {
+	.tab-btn {
+		text-align: center;
+		margin-top: 60px;
+		margin-bottom: 60px;
+		ul, li {margin: 0;padding: 0;list-style: none;}
+		ul {display: inline-block;background:#F0F2FD;border-radius: 30px;}
+		ul li {display: inline-block;vertical-align: middle;}
+		ul li.active a {background:#4959EE;color: #fff;}
+		ul li a {display: block;color: #2D2D2D;letter-spacing: .04em;border-radius: 30px;padding: 13px 59px;}
+	}
+	.single-pricing {
+		border: 1px solid #E2E2E2;
+		border-radius: 20px;
+		text-align: center;
+		padding-top: 30px;
+		display: block;
+		&:before {
+			border-radius: 20px;
+			@include thm-gradient();
+		}
+		&:hover {
+			.title h3 {color: #fff;}
+			.percent span {color: #2d2d2d;}
+			.percent p {color: #fff;}
+			.info p {color: #fff;}
+			.btn-box a {background:#2d2d2d;}
+		}
+		.title {
+			h3 {margin: 0;color: #2D2D2D;font-size: 16px;text-transform: uppercase;font-family: 'Roboto';transition: all .4s ease;}
+		}
+		.percent {padding-top: 30px;
+			span {display: inline-block;color: #4199FF;font-size: 46px;font-family: 'Roboto';line-height: 1em;transition: all .4s ease;}
+			p {margin: 0;margin-top: 7px;transition: all .4s ease;}
+		}
+		.info {padding-top: 28px;}
+		.info p {margin: 0;transition: all .4s ease;}
+		.info p + p {margin-top: 12px;}
+		.btn-box {margin-top: 40px;padding-bottom: 30px;
+			a {display: inline-block;background:#6675F4;color: #fff;text-transform: uppercase;font-size: 16px;border-radius: 30px;padding: 14px 44.5px;transition: all .4s ease;}
+		}
+	}
+}

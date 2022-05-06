@@ -1,0 +1,106 @@
+<% include ../partials/header %>
+<!-- content @s -->
+<div class="nk-content nk-content-fluid">
+  <div class="container-xl wide-xl">
+    <div class="nk-content-inner">
+      <div class="nk-content-body">
+        <div class="components-preview">
+          <div class="nk-block-head nk-block-head-lg wide-sm">
+            <div class="nk-block-head-content">
+              <div class="nk-block-head-sub"><a class="back-to" href="/dashboard"><em
+                    class="icon ni ni-arrow-left"></em><span>Dashboard</span></a></div>
+            </div>
+          </div><!-- nk-block -->
+          <div class="nk-block nk-block-lg">
+            <div class="nk-block-head">
+              <div class="nk-block-head-content">
+                <h4 class="nk-block-title">Withdrawal History</h4>
+
+              </div>
+            </div>
+            <div class="card card-bordered card-preview">
+              <table class="table table-tranx">
+                <thead>
+                  <tr class="tb-tnx-head">
+                    <th class="tb-tnx-id"><span class="">#</span></th>
+                    <th class="tb-tnx-info">
+                      <span class="tb-tnx-desc d-none d-sm-inline-block">
+                        <span>BTC Address</span>
+                      </span>
+                      <span class="tb-tnx-date d-md-inline-block d-none">
+                        <span class="d-md-none">Date</span>
+                        <span class="d-none d-md-block">
+                          <span>Issue Date</span>
+                        </span>
+                      </span>
+                    </th>
+                    <th class="tb-tnx-amount">
+                      <span class="tb-tnx-total">Amount</span>
+                      <span class="tb-tnx-status d-none d-md-inline-block">Status</span>
+                    </th>
+                </thead>
+                <tbody>
+                  <% withdrawals.forEach((withdrawal) => { %>
+                  <tr class="tb-tnx-item">
+                    <td class="tb-tnx-id">
+                      <span><%=withdrawal.id%></span>
+                    </td>
+                    <td class="tb-tnx-info">
+                      <div class="tb-tnx-desc">
+                        <span class="title"><%=withdrawal.address%></span>
+                      </div>
+                      <div class="tb-tnx-date">
+                        <%
+                        var months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                       
+                        var date = new Date(withdrawal.createdAt);
+                       
+    
+                        var year = date.getFullYear();
+                       
+                        // Month
+                        var month = months_arr[date.getMonth()];
+                       
+                        // Day
+                        var day = date.getDate();
+                       
+                        // Hours
+                        var hours = date.getHours();
+                       
+                        // Minutes
+                        var minutes = "0" + date.getMinutes();
+                       
+                        // Seconds
+                        var seconds = "0" + date.getSeconds();
+                       
+                        // Display date time in MM-dd-yyyy h:m:s format
+                        var convdataTime = month+'-'+day+'-'+year;
+                        %>
+                        <span class="date"><%=convdataTime%></span>
+                      </div>
+                    </td>
+                    <td class="tb-tnx-amount">
+                      <div class="tb-tnx-total">
+                        <span class="amount">$<%=withdrawal.amount%></span>
+                      </div>
+                      <% if (withdrawal.status == 'Pending'){%>
+                      <div class="tb-tnx-status">
+                        <span class="badge badge-dot badge-warning">Pending</span>
+                      </div>
+                      <%}else if(withdrawal.status == 'Paid'){%>
+                      <span class="badge badge-dot badge-success">Paid</span>
+                      <%}else{%>
+                      <span class="badge badge-dot badge-danger">Declined</span>
+                      <%}%>
+                      
+                    </td>
+                  </tr>
+                  <%}) %>
+
+
+                </tbody>
+              </table>
+            </div><!-- .card-preview -->
+          </div><!-- nk-block -->
+
+          <% include ../partials/footer %>

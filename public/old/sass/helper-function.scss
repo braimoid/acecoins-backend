@@ -1,0 +1,25 @@
+@mixin placeholder {
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        @content;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+        @content;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+        @content;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+        @content;
+    }
+}
+
+@mixin thm-gradient() {
+    background: #4c57e5;
+    background: -moz-linear-gradient(left, #4c57e5 0%, #4c57e5 28%, #636ded 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #4c57e5), color-stop(28%, #4c57e5), color-stop(100%, #636ded));
+    background: -webkit-linear-gradient(left, #4c57e5 0%, #4c57e5 28%, #636ded 100%);
+    background: -o-linear-gradient(left, #4c57e5 0%, #4c57e5 28%, #636ded 100%);
+    background: -ms-linear-gradient(left, #4c57e5 0%, #4c57e5 28%, #636ded 100%);
+    background: linear-gradient(to right, #4c57e5 0%, #4c57e5 28%, #636ded 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c57e5', endColorstr='#636ded', GradientType=1 );
+}

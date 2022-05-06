@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>AceCoin</title>
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="57x57" href="old/img/fav/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="old/img/fav/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="old/img/fav/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="old/img/fav/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="old/img/fav/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="old/img/fav/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="old/img/fav/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="old/img/fav/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="old/img/fav/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="old/img/fav/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="old/img/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="old/img/fav/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="old/img/fav/favicon-16x16.png">
+  <link rel="manifest" href="/old/manifest.json">
+  <meta name="alfacoins-site-verification" content="5e0a3c0ce87c25e0a3c0ce87f75e0a3c0ce882d_ALFAcoins">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="/old/css/style.css">
+  <link rel="stylesheet" href="/old/css/responsive.css">
+  <link rel="manifest" href="/old/manifest.json" />
+  <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.9/pwacompat.min.js"
+    integrity="sha384-VcI6S+HIsE80FVM1jgbd6WDFhzKYA0PecD/LcIyMQpT4fMJdijBh0I7Iblaacawc"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+  <nav class="navbar navbar-default header-navigation stricky">
+    <div class="thm-container clearfix">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".main-navigation"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <img src="images/logo.png" style="max-width: 10rem; max-height: 5rem;" alt="Awesome Image" />
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse main-navigation mainmenu one-page-scroll-menu" id="main-nav-bar">
+
+
+        <ul class="nav navbar-nav navigation-box">
+          <li class="scrollToLink"> <a href="/">Home</a> </li>
+          <li class="scrollToLink"> <a href="/faq">FAQ</a> </li>
+          <li class="scrollToLink"> <a href="/terms">Terms and Conditions</a> </li>
+        </ul>
+
+      </div>
+      <% if(currentUser) { %>
+      <div class="right-side-box">
+        <a class="join-btn" href="/dashboard">Dashboard</a>
+      </div><!-- /.right-side-box -->
+      <% } %>
+      <% if(!currentUser) { %>
+      <div class="right-side-box">
+        <a class="join-btn" href="/login">Login</a>
+      </div><!-- /.right-side-box -->
+      <% } %>
+
+    </div><!-- /.navbar-collapse -->
+    <!-- /.container -->
+  </nav>
+  </header><!-- /.header -->
+  <div class="container" style="padding-top: 10px">
+    <% if (error && error.length > 0) { %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <%=error%>
+    </div>
+    <% } %>
+    <% if (success && success.length > 0) { %>
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <%=success%>
+    </div>
+    <% } %>
+  </div>

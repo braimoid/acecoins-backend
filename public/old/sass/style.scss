@@ -1,0 +1,160 @@
+/***************************************************************************************************************
+||||||||||||||||||||||||||||       MASTER STYLESHEET FOR Accure               ||||||||||||||||||||||||||||||||||
+****************************************************************************************************************
+||||||||||||||||||||||||||||              TABLE OF CONTENT                  ||||||||||||||||||||||||||||||||||||
+****************************************************************************************************************
+****************************************************************************************************************
+* 1. imported styles 
+* 2. miscelnious styles 
+* 3. header styles 
+* 4. banner styles 
+* 5. statics styles 
+* 6. newsletter styles 
+* 7. brand styles 
+* 8. faq styles 
+* 9. call to action styles 
+* 10. get in touch styles 
+* 11. transaction performance styles 
+* 12. testimonial styles 
+* 13. team styles 
+* 14. pricing styles 
+* 15. our philoshopy styles 
+* 16. footer styles 
+* 17. about styles 
+****************************************************************************************************************
+||||||||||||||||||||||||||||            End TABLE OF CONTENT                ||||||||||||||||||||||||||||||||||||
+****************************************************************************************************************/
+
+
+// math functions are not included in sass
+@import "drop-shadow-converter/mathfunctions";
+// import converter
+@import "drop-shadow-converter/drop-shadow-converter";
+// template sass helper functions
+@import "helper-function.scss";
+
+/************************** 
+* 1. imported styles 
+***************************/
+
+@import 'modules/_imported';
+
+/************************** 
+* 2. miscelnious styles 
+***************************/
+
+@import 'modules/_miscelnious';
+
+/************************** 
+* 3. header styles 
+***************************/
+
+@import 'modules/_header';
+
+/************************** 
+* 4. banner styles 
+***************************/
+
+@import 'modules/_banner';
+
+/************************** 
+* 5. statics styles 
+***************************/
+
+@import 'modules/_statics';
+
+/************************** 
+* 6. newsletter styles 
+***************************/
+
+@import 'modules/_newsletter';
+
+/************************** 
+* 7. brand styles 
+***************************/
+
+@import 'modules/_brand';
+
+/************************** 
+* 8. faq styles 
+***************************/
+
+@import 'modules/_faq';
+
+/************************** 
+* 9. call to action styles 
+***************************/
+
+@import 'modules/_call-to-action';
+
+/************************** 
+* 10. get in touch styles 
+***************************/
+
+@import 'modules/_get-in-touch';
+
+/************************** 
+* 11. transaction performance styles 
+***************************/
+
+@import 'modules/_transaction-performance';
+
+/************************** 
+* 12. testimonial styles 
+***************************/
+
+@import 'modules/_testimonials';
+
+/************************** 
+* 13. team styles 
+***************************/
+
+@import 'modules/_team';
+
+/************************** 
+* 14. pricing styles 
+***************************/
+
+@import 'modules/_pricing';
+
+/********************************
+* calculate and payment styles 
+*********************************/
+
+@import 'modules/_calculate-and-payment';
+
+/********************************
+* tools styles 
+*********************************/
+
+@import 'modules/_tools';
+
+/********************************
+* why choose us styles 
+*********************************/
+
+@import 'modules/_why-choose-us';
+
+/********************************
+* process section styles 
+*********************************/
+
+@import 'modules/_process-section';
+
+/************************** 
+* 15. our philoshopy styles 
+***************************/
+
+@import 'modules/_our-philoshopy';
+
+/************************** 
+* 16. footer styles 
+***************************/
+
+@import 'modules/_footer';
+
+/************************** 
+* 17. about styles 
+***************************/
+
+@import 'modules/_about';

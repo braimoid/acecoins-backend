@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+<% if (error && error.length > 0) { %>
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <%=error%>
+</div>
+<% } %> <% if (success && success.length > 0) { %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <%=success%>
+</div>
+<% } %>
+<!-- @@ Confirm Invest Modal @e -->
+<div class="" tabindex="-1" id="confirm-invest">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <a href="/dashboard" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+      <div class="modal-body modal-body-lg text-center">
+        <div class="nk-modal">
+          <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-info bg-info"></em>
+          <h4 class="nk-modal-title">Payment instruction</h4>
+          <div class="nk-modal-text">
+            <p class="sub-text">To Complete your deposit of <%=amount%> USD, Pay the exact amount of
+              <strong><%=pay_amount%> BTC</strong> to the address <strong><%=pay_address%></strong>.</p>
+          </div>
+          <div class="nk-modal-action-lg">
+            <ul class="btn-group flex-wrap justify-center g-4">
+              <li><a href="mailto:admin@acecoins.uk" class="btn btn-lg btn-mw btn-primary">Contact Support</a></li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- .modal-body -->
+      <div class="modal-footer bg-lighter">
+        <div class="text-center w-100">
+          <p><strong>Note:</strong> Payment processing may take up to an hour</p>
+          <p>Earn upto $200 for each friend your refer! <a href="/dashboard">Invite friends</a></p>
+        </div>
+      </div>
+    </div><!-- .modal-content -->
+  </div><!-- .modla-dialog -->
+</div><!-- .modal -->
+
+<% include ../partials/footer%>

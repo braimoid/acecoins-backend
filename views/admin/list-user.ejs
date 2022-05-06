@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+	<base href="../">
+	<meta charset="utf-8">
+	<meta name="author" content="Softnio">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description"
+		content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+	<!-- Fav Icon  -->
+	<link rel="shortcut icon" href="./images/favicon.png">
+	<!-- Page Title  -->
+	<title>Acecoins</title>
+	<!-- StyleSheets  -->
+	<link rel="stylesheet" href="./assets/css/dashlite.css?ver=1.9.1">
+	<link id="skin-default" rel="stylesheet" href="./assets/css/theme.css?ver=1.9.1">
+</head>
+
+<body class="nk-body npc-default has-apps-sidebar has-sidebar ">
+	<!-- main @s -->
+	<div class="nk-main ">
+		<!-- wrap @s -->
+		<div class="nk-wrap ">
+			<!-- content @s -->
+			<div class="nk-content ">
+				<div class="container-fluid">
+					<div class="nk-content-inner">
+						<div class="nk-content-body">
+
+							<div class="col-xl-12 col-xxl-8">
+								<div class="card card-bordered card-full">
+									<div class="card-inner border-bottom">
+										<div class="card-title-group">
+											<div class="card-title">
+												<h6 class="title">All Users</h6>
+											</div>
+											<form class="form-inline float-right" method="GET" action="/admin/users">
+												<div class="form-group mr-2" style="display: inline;">
+													<input type="text" class="form-control" name="search" placeholder="email">
+												</div>
+												<button style="display: inline;" type="submit" class="btn btn-info">Search User</button>
+											</form>
+										</div>
+
+									</div>
+									<div class="nk-tb-list">
+										<div class="nk-tb-item nk-tb-head">
+											<div class="nk-tb-col"><span>email</span></div>
+											<div class="nk-tb-col tb-col-sm"><span>Who</span></div>
+											<div class="nk-tb-col"><span>Balance</span></div>
+											<div class="nk-tb-col tb-col-sm"><span>&nbsp;</span></div>
+											<div class="nk-tb-col"><span>&nbsp;</span></div>
+										</div>
+										<% users.forEach((user) => {%>
+										<div class="nk-tb-item">
+											<div class="nk-tb-col">
+												<div class="align-center">
+													<span class="tb-sub ml-2"><%=user.username%></span>
+												</div>
+											</div>
+											<div class="nk-tb-col tb-col-sm">
+												<div class="user-card">
+													<div class="user-avatar user-avatar-xs bg-pink-dim">
+														<span><%=user.firstname[0].toUpperCase()%><%=user.lastname[0].toUpperCase()%></span>
+													</div>
+													<div class="user-name">
+														<span class="tb-lead"><%= user.firstname%>
+															<%=user.lastname%></span>
+													</div>
+												</div>
+											</div>
+
+											<div class="nk-tb-col">
+												<span class="tb-sub tb-amount"><%=user.balance%> <span>USD</span></span>
+											</div>
+											<div class="nk-tb-col tb-col-sm">
+												<%	if(user.userStatus == 'Verified'){ %>
+												<span class="tb-sub text-success"><%=user.userStatus%></span>
+
+												<%	}else{ %>
+												<span class="tb-sub text-failure"><%=user.userStatus%></span>
+
+												<% } %>
+											</div>
+											<div class="nk-tb-col nk-tb-col-action">
+												<div class="dropdown">
+													<a class="text-soft dropdown-toggle btn btn-sm btn-icon btn-trigger"
+														data-toggle="dropdown"><em class="icon ni ni-chevron-right"></em></a>
+													<div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
+														<ul class="link-list-plain">
+															<%	if(user.userStatus == 'Verified'){ %>
+															<li><a href="/admin/deactivate/<%=user.id%>">Deactivate</a></li>
+
+															<%	}else{ %>
+															<li><a href="/admin/activate/<%=user.id%>">Activate</a></li>
+															<% } %>
+															<li><a href="/admin/investments/<%=user.id%>">Investments</a></li>
+															<li><a href="/admin/fund/<%=user.id%>">fund</a></li>
+															<li><a href="/admin/invest/<%=user.id%>">Add Investment</a></li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+										<%})%>
+
+									</div><!-- .card -->
+								</div><!-- .col -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- content @e -->
+	</div>
+	<!-- wrap @e -->
+	</div>
+	<!-- main @e -->
+	</div>
+	<!-- app-root @e -->
+	<!-- JavaScript -->
+	<script src="./assets/js/bundle.js?ver=1.9.1"></script>
+	<script src="./assets/js/scripts.js?ver=1.9.1"></script>
+	<script src="./assets/js/charts/gd-invest.js?ver=1.9.1"></script>
+</body>
+
+</html>

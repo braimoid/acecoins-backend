@@ -1,0 +1,13 @@
+.call-to-action-style-one {
+	background:#4858EE;
+	padding: 57px 0;
+	.title {
+		h2 {margin: 0;color: #EFF0FD;font-family: 'Roboto';font-size: 21px;font-weight: bold;text-transform: uppercase;}
+		p {margin: 0;color: #EFF0FD;font-family: 'Roboto';margin-top: 5px;}
+	}
+	.cta-btn-box {
+		.cta-btn {display: inline-block;background:#4858EE;color: #FFFFFF;font-size: 16px;text-transform: uppercase;box-shadow: drop-shadow-converter(#2D2D2D, $angle: 135, $distance: 0px, $spread: 0, $size: 20px, $opacity: 20%);padding: 10.5px 20.5px;border-radius: 20px;transition: all .4s ease;
+			&:hover {background:#222;}
+		}
+	}
+}

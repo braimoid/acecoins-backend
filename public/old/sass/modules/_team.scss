@@ -1,0 +1,24 @@
+.single-team {
+	text-align: center;
+	&:hover {
+		.img-box > img {transform: scale(1.05)}
+	} 
+	.img-box {display: inline-block;overflow: hidden;position: relative;border-radius: 50%;		
+		> img {transform: scale(1.0);transition: all .4s ease;border-radius: 50%;}
+
+	}
+	h3, p {margin: 0;}
+	h3 {font-family: 'Roboto';color: #2D2D2D;font-weight: bold;font-size: 21px;text-transform: uppercase;margin-top: 25px;margin-bottom: 10px;}
+	p {color: #2D2D2D;}
+	.social {margin-top: 20px;
+		a {display: inline-block;vertical-align: middle;width: 30px;height: 30px;box-shadow: drop-shadow-converter(#616BEC, $angle: 135, $distance: 0px, $spread: 0, $size: 8px, $opacity: 20%);color: #989898;border-radius: 50%;transition: all .4s ease;line-height: 30px;
+			&:hover {background:#4C57E5;color: #fff;}
+			+ a {margin-left: 10px;}
+		}
+	}
+}
+.team-section {
+	.view-all-box {margin-top: 60px;
+		a {color: #4C57E5;text-decoration: underline;}
+	}
+}

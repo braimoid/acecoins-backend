@@ -1,0 +1,59 @@
+.transaction-performance-section {
+	padding: 115px 0;
+	.sec-title {text-align: center;
+		h2 {margin: 0;color: #2D2D2D;font-size: 27px;letter-spacing: .05em;font-family: 'Roboto';font-weight: bold;margin-bottom: 15px;text-transform: uppercase;}
+		p {margin: 0;}
+	}
+	.tab-btn {
+		text-align: center;
+		margin-top: 60px;
+		margin-bottom: 60px;
+		ul, li {margin: 0;padding: 0;list-style: none;}
+		ul {display: inline-block;background:#F0F2FD;border-radius: 30px;}
+		ul li {display: inline-block;vertical-align: middle;}
+		ul li.active a {background:#4959EE;color: #fff;}
+		ul li a {display: block;color: #2D2D2D;letter-spacing: .04em;border-radius: 30px;padding: 13px 59px;}
+	}
+	.transaction-table {
+		box-shadow: drop-shadow-converter(#2D2D2D, $angle: 135, $distance: 0px, $spread: 0, $size: 26px, $opacity: 20%);
+		.table {margin-bottom: 0;padding-left: 30px;}
+		.table>thead>tr>th:first-child {padding-left: 30px;}
+		.table>thead>tr>th:last-child {padding-right: 30px;}
+		table>tbody>tr>td:first-child {padding-left: 30px;}
+		table>tbody>tr>td:last-child {padding-right: 30px;}
+		.table>thead>tr>th {color: #2D2D2D;font-size: 16px;font-weight: normal;font-family: 'Roboto';text-transform: uppercase;border-bottom: 1px solid #dfe2e5;padding-top: 15px;padding-bottom: 15px;}
+		table>tbody>tr>td {line-height: 30px;padding-top: 9px;padding-bottom: 9px;}
+		table>tbody>tr>td > img {margin-right: 10px;}
+	}
+	.performance-content {
+		.tab-btn ul li a {padding: 13px 54px;}		
+		.tropy-winner {			
+			
+			padding-bottom: 25px;
+			box-shadow: drop-shadow-converter(#2D2D2D, $angle: 135, $distance: 0px, $spread: 0, $size: 26px, $opacity: 20%);
+			.title {
+				padding: 16px 0;
+				padding-left: 30px;
+				padding-right: 30px;
+				margin-bottom: 30px;
+				border-bottom: 1px solid #dfe2e5;
+				h3 {margin: 0;text-transform: uppercase;color: #2D2D2D;font-family: 'Roboto';font-size: 16px;}
+			}
+			.single-trophy-winner {
+				padding-left: 30px;
+				padding-right: 30px;
+				+ .single-trophy-winner {margin-top: 26px;}
+				.img-box, .text-box {display: table-cell;vertical-align: top;}
+				.img-box {
+					width: 55px;
+				}
+				.text-box {padding-left: 20px;
+					h3 {margin: 0;color: #383838;font-family: 'Roboto';font-size: 16px;margin-bottom: 6px;}
+					span {display: block;color: rgba(#2D2D2D,.7);}
+					span.profit {color: #03BD03;font-size: 21px;font-weight: bold;font-family: 'Roboto';margin-top: 10px;margin-bottom: 5px;}
+					a.read-more {display: block;color: #5C66EA;text-decoration: underline;margin-top: 5px;}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,227 @@
+<% include ../partials/header %>
+
+<!-- content @s -->
+<div class="nk-content nk-content-lg nk-content-fluid">
+  <div class="container-xl wide-lg">
+    <div class="nk-content-inner">
+      <div class="nk-content-body">
+        <div class="nk-block-head">
+          <div class="nk-block-head-content">
+            <div class="nk-block-head-sub"><span>My Plan</span></div>
+            <div class="nk-block-between-md g-4">
+              <div class="nk-block-head-content">
+                <h2 class="nk-block-title fw-normal">
+                  Invested Schemes
+                </h2>
+                <div class="nk-block-des">
+                  <p>
+                    Here is your current balance and your active
+                    investement plans.
+                  </p>
+                </div>
+              </div>
+              <!-- .nk-block-head-content -->
+              <div class="nk-block-head-content">
+                <ul class="nk-block-tools gx-3">
+                  <li>
+                    <a href="/wallet/withdraw" class="btn btn-primary"><span>Withdraw</span>
+                      <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a>
+                  </li>
+                  <li>
+                    <a href="/invest" class="btn btn-white btn-light"><span>Invest More</span>
+                      <em class="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- .nk-block-head-content -->
+            </div>
+          </div>
+        </div>
+        <!-- .nk-block-head -->
+        <div class="nk-block">
+          <div class="card card-bordered">
+            <div class="card-inner-group">
+              <div class="card-inner">
+                <div class="row gy-gs">
+                  <div class="col-lg-5">
+                    <div class="nk-iv-wg3">
+                      <div class="nk-iv-wg3-title">Total Balance</div>
+                      <div class="nk-iv-wg3-group flex-lg-nowrap gx-4">
+                        <div class="nk-iv-wg3-sub">
+                          <div class="nk-iv-wg3-amount">
+                            <div class="number">
+                              <%=currentUser.balance + currentUser.profit%>
+                              <small class="currency currency-usd">USD</small>
+                            </div>
+                          </div>
+                          <div class="nk-iv-wg3-subtitle">
+                            Available Balance
+                          </div>
+                        </div>
+                        <div class="nk-iv-wg3-sub">
+                          <span class="nk-iv-wg3-plus text-soft"><em class="icon ni ni-plus"></em></span>
+                          <div class="nk-iv-wg3-amount">
+                            <div class="number-sm">$<%=activeAmount%></div>
+                          </div>
+                          <div class="nk-iv-wg3-subtitle">
+                            Locked Balance
+                            <em class="icon ni ni-info-fill" data-toggle="tooltip" data-placement="right"
+                              title="You can't use"></em>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- .row -->
+              </div>
+              <!-- .card-inner -->
+            </div>
+            <!-- .card-inner-group -->
+          </div>
+          <!-- .card -->
+        </div>
+        <!-- .nk-block -->
+        <div class="nk-block nk-block-lg">
+          <div class="nk-block-head-sm">
+            <div class="nk-block-head-content">
+              <h5 class="nk-block-title">
+                Active Plan <span class="count text-base">(<%=activeInvestment.length%>)</span>
+              </h5>
+            </div>
+          </div>
+          <div class="nk-iv-scheme-list">
+            <% activeInvestment.forEach((investment) => { %>
+            <div class="nk-iv-scheme-item">
+              <div class="nk-iv-scheme-icon is-running">
+                <em class="icon ni ni-update"></em>
+              </div>
+              <div class="nk-iv-scheme-info">
+                <div class="nk-iv-scheme-name">
+                  <%=investment.plan%>
+                </div>
+                <div class="nk-iv-scheme-desc">
+                  Invested Amount - <span class="amount">$<%=investment.amount%></span>
+                </div>
+              </div>
+              <div class="nk-iv-scheme-term">
+                <div class="nk-iv-scheme-start nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft">Start Date</span>
+                  <span class="nk-iv-scheme-value date"><%=investment.approvedAt%></span>
+                </div>
+                <div class="nk-iv-scheme-end nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft">End Date</span>
+                  <span class="nk-iv-scheme-value date"><%=investment.endDate%></span>
+                </div>
+              </div>
+              <div class="nk-iv-scheme-amount">
+                <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft"> Expected Total Return</span>
+                  <span class="nk-iv-scheme-value amount">$
+                    <%=investment.amount + (investment.amount * Number(investment.percentage))%></span>
+                </div>
+                <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span>
+                  <span class="nk-iv-scheme-value amount">$ <% let profit; if (investment.interest.length > 0){ %>
+                    <% profit = investment.interest.reduce((total, amount) => total + amount) %>
+                    <%=profit%>
+                    <%} else { %>
+                    <%= 0 %>
+                    <% } %>
+
+                    <span class="amount-ex">~
+                      <%=(profit/(investment.amount * Number(investment.percentage))).toFixed(2)%>%</span>
+                  </span>
+                </div>
+              </div>
+              <div class="nk-iv-scheme-more">
+                <a class="btn btn-icon btn-lg btn-round btn-trans" href="/investment/<%=investment.id%>"><em
+                    class="icon ni ni-forward-ios"></em></a>
+              </div>
+              <div class="nk-iv-scheme-progress">
+                <div class="progress-bar" data-progress="25"></div>
+              </div>
+            </div>
+            <!-- .nk-iv-scheme-item -->
+            <% }) %>
+
+          </div>
+          <!-- .nk-iv-scheme-list -->
+        </div>
+        <!-- .nk-block -->
+        <div class="nk-block nk-block-lg">
+          <div class="nk-block-head-sm">
+            <div class="nk-block-between">
+              <div class="nk-block-head-content">
+                <h5 class="nk-block-title">
+                  Recently End <span class="count text-base">(<%=maturedInvestment.length%>)</span>
+                </h5>
+              </div>
+
+            </div>
+          </div>
+          <div class="nk-iv-scheme-list">
+            <% maturedInvestment.forEach((investment) => { %>
+            <div class="nk-iv-scheme-item">
+              <div class="nk-iv-scheme-icon is-running">
+                <em class="icon ni ni-update"></em>
+              </div>
+              <div class="nk-iv-scheme-info">
+                <div class="nk-iv-scheme-name">
+                  <%=investment.plan%>
+                </div>
+                <div class="nk-iv-scheme-desc">
+                  Invested Amount - <span class="amount">$<%=investment.amount%></span>
+                </div>
+              </div>
+              <div class="nk-iv-scheme-term">
+                <div class="nk-iv-scheme-start nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft">Start Date</span>
+                  <span class="nk-iv-scheme-value date"><%=investment.approvedAt%></span>
+                </div>
+                <div class="nk-iv-scheme-end nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft">End Date</span>
+                  <span class="nk-iv-scheme-value date"><%=investment.endDate%></span>
+                </div>
+              </div>
+              <div class="nk-iv-scheme-amount">
+                <div class="nk-iv-scheme-amount-a nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft"> Expected Total Return</span>
+                  <span class="nk-iv-scheme-value amount">$
+                    <%=investment.amount + (investment.amount * Number(investment.percentage))%></span>
+                </div>
+                <div class="nk-iv-scheme-amount-b nk-iv-scheme-order">
+                  <span class="nk-iv-scheme-label text-soft">Net Profit Earn</span>
+                  <span class="nk-iv-scheme-value amount">$ <% let profit; if (investment.interest.length > 0){ %>
+                    <% profit = investment.interest.reduce((total, amount) => total + amount) %>
+                    <%=profit%>
+                    <%} else { %>
+                    <% profit = 0 %>
+                    <%= 0 %>
+                    <% } %>
+
+                </div>
+              </div>
+              <div class="nk-iv-scheme-more">
+                <a class="btn btn-icon btn-lg btn-round btn-trans" href="html/invest/scheme-details.html"><em
+                    class="icon ni ni-forward-ios"></em></a>
+              </div>
+              <div class="nk-iv-scheme-progress">
+                <div class="progress-bar" data-progress="25"></div>
+              </div>
+            </div>
+            <!-- .nk-iv-scheme-item -->
+            <%})%>
+
+          </div>
+          <!-- .nk-iv-scheme-list -->
+        </div>
+        <!-- .nk-block -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- content @e -->
+
+<% include ../partials/footer %>

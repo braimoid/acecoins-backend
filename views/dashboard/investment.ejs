@@ -1,0 +1,169 @@
+<% include ../partials/dashboard-header %>
+<style>
+.tab-btn ul li {
+  margin-top: 10px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.tab-btn ul li .btn-info{
+margin-left: 100%
+}
+</style>
+          <div class="wrap">
+            <div class="side-menu">
+              <nav class="navbar navbar-default" id="main-navigation" role="navigation">
+                <div class="navbar-header">
+                  <div class="brand-wrapper">
+                    <div class="brand-name-wrapper">
+                      <a class="navbar-brand" href="#">Navigation Menu</a>
+                    </div>
+                  </div>
+                </div><!-- Main Menu -->
+                <div class="side-menu-container">
+                    <ul class="nav navbar-nav">
+                        <li>
+                          <a href="/dashboard"><span class="glyphicon glyphicon-send"></span> Dashboard</a>
+                        </li>
+                        <li>
+                          <a href="/referrals"><span class="glyphicon glyphicon-plane"></span>Referrals</a>
+                        </li>
+                        <li class="active">
+                          <a href="/investments"><span class="glyphicon glyphicon-cloud"></span> Investments</a>
+                        </li><!-- Dropdown-->
+                        <li>
+                          <a href="/plans"><span class="glyphicon glyphicon-signal"></span> New investements</a>
+                        </li>
+                        <li>
+                          <a href="/income"><span class="glyphicon glyphicon-signal"></span>Total Income</a>
+                        </li>
+                      </ul>
+                </div><!-- /.navbar-collapse -->
+              </nav>
+            </div><!-- Main Content -->
+            <div class="container-fluid">
+              <div class="side-body">
+                <div class="page-title-box">
+                  <h3 class="page-title pull-left">Investments</h3>
+                  <ol class="breadcrumb pull-right">
+                    <li>
+                        <a href="/dashboard">home</a>
+                    </li>
+                    <li class="active">investments</li>
+                  </ol>
+                  <div class="clearfix"></div>
+                  <div class="panel panel-green">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-xs-9">
+                          <div class="huge">
+                            <%=investment%>
+                          </div>
+                          <div>
+                            Investments
+                          </div>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                          <i class="fa fa-laptop fa-5x"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-btn" role="tablist">
+                      <ul>
+                          <li class="active" data-tab-name="monthly-price"><a href="#monthly-price" aria-controls="monthly-price" class=" mt-4 btn btn-primary" role="tab" data-toggle="tab">Investments</a></li><!--
+                          --><li data-tab-name="yearly-price"><a href="#yearly-price" aria-controls="yearly-price" role="tab" class=" mt- 4 btn btn-info"  data-toggle="tab">Withdraw history</a></li>
+                      </ul>
+                  </div><!-- /.tab-btn -->
+                  <div class="tab-content">
+                      <div class="tab-pane fade in active" id="monthly-price">
+                          <div class="row" style="margin-left:10px;">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Plan</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Investment Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% investments.forEach(function(investment) { %>
+                                <tr>
+                                <td><%=investment.plan%></td>
+                                <td><%=investment.amount%></td>
+                                <%
+                                var months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                               
+                                var date = new Date(investment.createdAt);
+                               
+            
+                                var year = date.getFullYear();
+                               
+                                // Month
+                                var month = months_arr[date.getMonth()];
+                               
+                                // Day
+                                var day = date.getDate();
+                               
+                                // Hours
+                                var hours = date.getHours();
+                               
+                                // Minutes
+                                var minutes = "0" + date.getMinutes();
+                               
+                                // Seconds
+                                var seconds = "0" + date.getSeconds();
+                               
+                                // Display date time in MM-dd-yyyy h:m:s format
+                                var convdataTime = month+'-'+day+'-'+year;
+                                %>
+                                <td><%=convdataTime%></td>
+                              </tr>
+                                
+                              <% }) %>
+    
+                            </tbody>
+                          </table>
+                              
+                          </div><!-- /.row -->
+                      </div>
+                      <div class="tab-pane fade " id="yearly-price">
+                          <div class="row" style="margin-left:10px;">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Adress</th>
+                                    <th scope="col">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% if(Request.length < 1){ %>
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                      You have not made any Withdrawal all withdraw will appear here
+                                    </div>
+                                  <% } %>
+                                  
+                                  <% Request.forEach(function(request) { %>
+                                    <tr>
+                                    <td><%=request.amount%></td>
+                                    <td><%=request.message%></td>
+                                    <td><%=request.status%></td>
+                                  <% }) %>
+                                </tbody>
+                              </table>
+                          </div><!-- /.row -->
+                      </div>
+                  </div><!-- /.tab-content -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+        <script src="https://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/js/dashboard.js"></script>
+      </body>
+</html>
