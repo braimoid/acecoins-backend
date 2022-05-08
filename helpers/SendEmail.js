@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
 	const transporter = nodemailer.createTransport({
-		host: 'acecoins.uk',
+		host: '18573565.acecoins.uk',
 		port: 465,
 		auth: {
 			user: 'admin@acecoins.uk',
@@ -18,7 +18,7 @@ const sendEmail = async (options) => {
 		text: options.body,
 	};
 
-	const info = await transporter.sendMail(message);
+	const info = await transporter.sendMail(message).catch(console.log);
 
 	console.log('Message sent: %s', info.messageId);
 };
