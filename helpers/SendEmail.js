@@ -18,9 +18,9 @@ const sendEmail = async (options) => {
 		text: options.body,
 	};
 
-	const info = await transporter.sendMail(message).catch(console.log);
+	const info = await transporter.sendMail(message).then(console.log).catch(console.log);
 
-	console.log('Message sent: %s', info.messageId);
+	//console.log('Message sent: %s', info.messageId);
 };
 
 module.exports = sendEmail;
