@@ -21,7 +21,7 @@ var UserSchema = new mongoose.Schema({
     },
   ],
   referralPaid: { type: Boolean, default: false },
-  created: { type: Date, default: Date.now },
+  created: { type: String, default: Date.now },
   resetToken: { type: String },
   resetTokenExpiry: { type: Date },
 });
