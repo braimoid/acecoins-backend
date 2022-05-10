@@ -39,7 +39,7 @@ router.get('/invest', middleware.isLoggedIn, function (req, res) {
       name: 'Starter Plan',
       term: '30',
       profit: 10,
-      min: 500,
+      min: 100,
       max: 4999,
       tag: 'Invest for 30 and get 10% every 10 days profit',
       start: moment().format('MM-DD-YYYY'),
