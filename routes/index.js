@@ -137,7 +137,7 @@ router.post('/invest', middleware.isLoggedIn, (req, res) => {
               next()
             }
             user.refEarned = user.refEarned + (invest.amount / 10)
-            // user.balance = user.balance + user.refEarned
+            user.balance = user.balance + user.refEarned
             user.save()
           })
         }
