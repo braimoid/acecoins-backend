@@ -55,7 +55,7 @@
       amount = Number(event.target.value)
       monthlyProfit = (amount * percentage) / 100
       profit.innerHTML = monthlyProfit
-      netProfit = Number(monthlyProfit * term/10)
+      netProfit = Number(monthlyProfit * term/100)
       net_profit.innerHTML = netProfit
       netReturn = Number(amount + netProfit)
       net_return.innerHTML = netReturn
