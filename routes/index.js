@@ -100,8 +100,8 @@ router.post('/invest', middleware.isLoggedIn, (req, res) => {
     req.flash('error', 'Investment for selected plan is between $5000 and $49999')
     return res.redirect('back')
   }
-  if (req.body.plan == 'Starter Plan' && (amount < 500 || amount > 4999)) {
-    req.flash('error', 'Investment for selected plan is between $500 and $4999')
+  if (req.body.plan == 'Starter Plan' && (amount < 100 || amount > 4999)) {
+    req.flash('error', 'Investment for selected plan is between $100 and $4999')
     return res.redirect('back')
   }
   if (req.body.pin == req.user.pin) {
