@@ -129,7 +129,7 @@ router.post('/invest', middleware.isLoggedIn, (req, res) => {
       User.findById(req.user.id, (err, user) => {
         user.balance = user.balance - invest.amount
 
-        if (req.user.referral) {
+        if (req.user.referral && user.referralPaid != true) {
           user.referralPaid = true
           User.findOne({ 'referralId': req.user.referral }, (err, user, next) => {
             if (err) {
@@ -137,7 +137,7 @@ router.post('/invest', middleware.isLoggedIn, (req, res) => {
               next()
             }
             user.refEarned = user.refEarned + (invest.amount / 10)
-            user.balance = user.balance + user.refEarned
+            // user.balance = user.balance + user.refEarned
             user.save()
           })
         }
