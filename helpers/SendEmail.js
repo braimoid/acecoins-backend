@@ -6,7 +6,7 @@ const sendEmail = async (options) => {
 		port: 465,
 		auth: {
 			user: 'admin@acecoins.uk',
-			pass: 'a9G$u_OCTtU%',
+			pass: 'acecoins2020',
 		},
 	});
 
