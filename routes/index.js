@@ -81,7 +81,7 @@ router.post('/invest', middleware.isLoggedIn, (req, res) => {
     return res.redirect('back');
   }
   if (req.body.plan == 'Diamond Plan') {
-    end = moment().add(90, 'dayss').format('MM-DD-YYYY');
+    end = moment().add(90, 'days').format('MM-DD-YYYY');
     percentage = 1.8;
   }
   if (req.body.plan == 'Silver Plan') {
@@ -90,7 +90,7 @@ router.post('/invest', middleware.isLoggedIn, (req, res) => {
   }
   if (req.body.plan == 'Starter Plan') {
     end = moment().add(30, 'days').format('MM-DD-YYYY');
-    percentage = 0.30;
+    percentage = 0.3;
   }
   if (req.body.plan == 'Diamond Plan' && amount < 50000) {
     req.flash('error', 'Minimum Investment for selected plan is $50000')
