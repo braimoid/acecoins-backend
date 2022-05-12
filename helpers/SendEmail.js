@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
 	const transporter = nodemailer.createTransport({
-		host: 'acecoins.uk',
+		host: 'server136-5.web-hosting.com',
 		port: 465,
 		auth: {
 			user: 'support@acecoins.uk',
