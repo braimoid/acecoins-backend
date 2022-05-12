@@ -136,9 +136,10 @@ router.post('/invest', middleware.isLoggedIn, (req, res) => {
               console.log(err)
               next()
             }
-            const earned = user.refEarned + (invest.amount / 10)
+            const earned = invest.amount / 10
+            if(user.refEarned + earned > 500) return;
             user.balance = user.balance + earned
-            user.refEarned = earned
+            user.refEarned = user.refEarned + earned
             user.save()
           })
         }
