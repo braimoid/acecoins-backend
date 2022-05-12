@@ -37,7 +37,7 @@ router.post(
             return res.redirect("/register");
         }
         User.register(
-            new User({ username: req.body.username }),
+            new User({ username: req.body.username.toLowerCase() }),
             req.body.password,
             function (err, user) {
                 if (err) {
@@ -207,7 +207,7 @@ router.get("/forget", (req, res) => {
     res.render("auth/forget", { message: req.flash("error") });
 });
 router.post("/forget", async function (req, res) {
-    User.findOne({ username: req.body.email }, (err, user) => {
+    User.findOne({ username: req.body.email.toLowerCase() }, (err, user) => {
         if (err || user === null) {
             req.flash("error", "user not found please enter correct email");
             return res.redirect("back");
