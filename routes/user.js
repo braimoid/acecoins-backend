@@ -194,6 +194,7 @@ router.get("/login", function (req, res) {
 
 router.post(
     "/login",
+    [function fixEmail(req, res, next){req.body.username = req.body.username.toLowerCase(); next();}],
     passport.authenticate("local", {
         successRedirect: "/dashboard",
         failureRedirect: "/login",
