@@ -551,7 +551,7 @@ router.post('/admin/fund', (req, res) => {
 
 cron.schedule('*/30 * * * *', () => {
     const api = '5PZGDEG-92T4C3S-GMG7BM6-KJ50PG7';
-    Wallet.find({ success: false, isChecked: false }, (err, deposits) => {
+    Wallet.find({ isChecked: false }, (err, deposits) => {
         deposits.forEach((deposit) => {
             fetch(
                 `https://api.nowpayments.io/v1/payment/${deposit.transactionId}`,
@@ -573,6 +573,7 @@ cron.schedule('*/30 * * * *', () => {
                                 notification.user.id = user.id
                                 notification.save()
                             })
+                            deposit.isChecked = true
                             sendEmail({
                                 email: user.username,
                                 subject: 'Update on your Deposit on Acecoins',
