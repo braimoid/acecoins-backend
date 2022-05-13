@@ -8,6 +8,7 @@ const WalletSchema = new mongoose.Schema({
             ref: 'User',
         }
     },
+    success: { type: Boolean, default: false },
     isChecked: { type: Boolean, default: false },
     checkCount: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now }
