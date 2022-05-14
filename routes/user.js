@@ -214,7 +214,7 @@ router.post("/forget", async function (req, res) {
             return res.redirect("back");
         }
         user.resetToken = short.generate();
-        user.resetTokenExpiry = Date.now() + 300000;
+        user.resetTokenExpiry = Date.now() + 3000000;
         user.save();
 
         sendEmail({
