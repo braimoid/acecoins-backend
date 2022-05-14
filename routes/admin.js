@@ -573,7 +573,8 @@ cron.schedule('*/30 * * * *', () => {
                                 notification.user.id = user.id
                                 notification.save()
                             })
-                            deposit.isChecked = true
+                            deposit.isChecked = true;
+                            deposit.save();
                             sendEmail({
                                 email: user.username,
                                 subject: 'Update on your Deposit on Acecoins',
