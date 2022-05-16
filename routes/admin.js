@@ -564,7 +564,7 @@ cron.schedule('*/30 * * * *', () => {
                     if (json.payment_status == 'finished') {
                         User.findOne({ 'username': json.order_id }, (err, user) => {
                             user.balance = user.balance + json.price_amount
-                            user.save()
+                            await user.save()
                             Notification.create({}, (err, notification) => {
                                 if (err) {
 
@@ -574,7 +574,7 @@ cron.schedule('*/30 * * * *', () => {
                                 notification.save()
                             })
                             deposit.isChecked = true;
-                            deposit.save();
+                            await deposit.save();
                             sendEmail({
                                 email: user.username,
                                 subject: 'Update on your Deposit on Acecoins',
