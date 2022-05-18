@@ -560,11 +560,11 @@ cron.schedule('*/30 * * * *', () => {
                     headers: { 'x-api-key': api },
                 }
             ).then((res) => res.json())
-                .then((json) => {
+                .then(async (json) => {
                     if (json.payment_status == 'finished') {
-                        User.findOne({ 'username': json.order_id }, (err, user) => {
+                        await User.findOne({ 'username': json.order_id }, (err, user) => {
                             user.balance = user.balance + json.price_amount
-                            await user.save()
+                            user.save()
                             Notification.create({}, (err, notification) => {
                                 if (err) {
 
@@ -573,8 +573,6 @@ cron.schedule('*/30 * * * *', () => {
                                 notification.user.id = user.id
                                 notification.save()
                             })
-                            deposit.isChecked = true;
-                            await deposit.save();
                             sendEmail({
                                 email: user.username,
                                 subject: 'Update on your Deposit on Acecoins',
@@ -703,6 +701,7 @@ cron.schedule('*/30 * * * *', () => {
                 </html>`
                             })
                         })
+                        deposit.isChecked = true;
                     }
                     deposit.checkCount += 1
                     if (deposit.checkCount >= 10) {
