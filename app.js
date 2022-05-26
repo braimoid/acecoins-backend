@@ -68,6 +68,9 @@ app.use(userRoutes);
 app.use(adminRoutes)
 
 
+//runs when server restart
+addinterest()
+
 cron.schedule('0 0 * * *', () => {
   addinterest()
 }, {
