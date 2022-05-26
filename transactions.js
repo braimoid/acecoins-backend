@@ -13,7 +13,8 @@ const addinterest =function addInterest(){
         if (invest.amount <= 4999 && invest.interest.length < 3){
           let interests;
           let period = invest.interest.length + 1
-          if(moment().format('MM-DD-YYYY') ==moment(invest.approvedAt).add(period, 'months').format('MM-DD-YYYY')){
+          let nextdays = period * 10
+          if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
               interests = invest.amount * 0.15
               invest.interest.push(interests)
               User.findById(invest.user.id, async (err, user)=> {
@@ -29,7 +30,8 @@ const addinterest =function addInterest(){
         else if (invest.amount >=5000 && invest.amount <= 49999 && invest.interest.length < 6){
           let interests;
           let period = invest.interest.length + 1
-          if(moment().format('MM-DD-YYYY') ==moment(invest.approvedAt).add(period, 'months').format('MM-DD-YYYY')){
+         let nextdays = period * 10
+          if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
               interests = invest.amount * 0.2
               invest.interest.push(interests)
               User.findById(investment.user.id, async (err, user)=> {
@@ -41,10 +43,11 @@ const addinterest =function addInterest(){
           }
         }
 
-        else if (invest.amount >=50000 && invest.interest.length < 12){
+        else if (invest.amount >=50000 && invest.interest.length < 9){
           let interests;
           let period = invest.interest.length + 1
-          if(moment().format('MM-DD-YYYY') ==moment(invest.approvedAt).add(period, 'months').format('MM-DD-YYYY')){
+     let nextdays = period * 10
+          if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
               interests = invest.amount * 0.3
               invest.interest.push(interests)
               User.findById(investment.user.id, async (err, user)=> {
@@ -84,7 +87,7 @@ const matureinvestment = function matureInvestment(){
                 await investment.save()
                 await user.save()
               })
-            }else if(investment.amount >= 50000  && investment.length == 12 && investment.isMature === false){
+            }else if(investment.amount >= 50000  && investment.length == 9 && investment.isMature === false){
               User.findById(investment.user.id, async (err, user)=> {
                 user.balance += Number(investment.amount)
                 investment.isMatured = true
