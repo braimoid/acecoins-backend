@@ -1,15 +1,15 @@
-const Investments = require('./models/investments')
-const User  = require('./models/user')
-const moment = require('moment')
+const Investments = require("./models/investments");
+const User = require("./models/user");
+const moment = require("moment");
 
-const addinterest =function addInterest(){
-    Investments.find({}).exec((err, investment)=>{
-      if(err){
-          console.log(err)
-      }
-      
+const addinterest = function addInterest() {
+  Investments.find({}).exec((err, investment) => {
+    if (err) {
+      console.log(err);
+    }
+
       investment.forEach((invest) => {
-        
+
         if (invest.amount <= 4999 && invest.interest.length < 3){
           let interests;
           let period = invest.interest.length + 1
@@ -23,7 +23,7 @@ const addinterest =function addInterest(){
                 user.save()
               })
               invest.save()
-              
+
           }
         }
 
@@ -34,7 +34,8 @@ const addinterest =function addInterest(){
           if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
               interests = invest.amount * 0.2
               invest.interest.push(interests)
-              User.findById(investment.user.id, async (err, user)=> {
+              //change
+              User.findById(invest.user.id, async (err, user)=> {
                 user.profit += interests
                 user.balance += interests
                 user.save()
@@ -50,58 +51,67 @@ const addinterest =function addInterest(){
           if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
               interests = invest.amount * 0.3
               invest.interest.push(interests)
-              User.findById(investment.user.id, async (err, user)=> {
+              //change
+              User.findById(invest.user.id, async (err, user)=> {
                 user.profit += interests
                 user.balance += interests
                 user.save()
               })
               invest.save()
           }
-        }         
-      })
-           
-  })
-}
-
-const matureinvestment = function matureInvestment(){
-
-    Investments.find({}).exec((err, investments)=>{
-        if(err){
-            console.log(err)
         }
+      })
+    //console.log(investment);
+  });
+};
 
-        investments.forEach((investment) => {
-            if(investment.amount < 5000 && investment.interest.length == 3 && investment.isMatured == false){
-             
-              User.findById(investment.user.id, async (err, user)=> {
-               
-                user.balance += Number(investment.amount)
-                investment.isMatured = true
-                await investment.save()
-                await user.save()
-              })
-            }else if(investment.amount >= 5000 && investment.amount > 50000 && investment.length == 6 && investment.isMature === false){
-              User.findById(investment.user.id, async (err, user)=> {
-                user.balance += Number(investment.amount)
-                investment.isMatured = true
-                await investment.save()
-                await user.save()
-              })
-            }else if(investment.amount >= 50000  && investment.length == 9 && investment.isMature === false){
-              User.findById(investment.user.id, async (err, user)=> {
-                user.balance += Number(investment.amount)
-                investment.isMatured = true
-                await investment.save()
-                await user.save()
-              })
-          }
-        })
-    })
+const matureinvestment = function matureInvestment() {
+  Investments.find({}).exec((err, investments) => {
+    if (err) {
+      console.log(err);
+    }
 
-}
+    investments.forEach((investment) => {
+      if (
+        investment.amount < 5000 &&
+        investment.interest.length == 3 &&
+        investment.isMatured == false
+      ) {
+        User.findById(investment.user.id, async (err, user) => {
+          user.balance += Number(investment.amount);
+          investment.isMatured = true;
+          await investment.save();
+          await user.save();
+        });
+      } else if (
+        investment.amount >= 5000 &&
+        investment.amount > 50000 &&
+        investment.length == 6 &&
+        investment.isMature === false
+      ) {
+        User.findById(investment.user.id, async (err, user) => {
+          user.balance += Number(investment.amount);
+          investment.isMatured = true;
+          await investment.save();
+          await user.save();
+        });
+      } else if (
+        investment.amount >= 50000 &&
+        investment.length == 9 &&
+        investment.isMature === false
+      ) {
+        User.findById(investment.user.id, async (err, user) => {
+          user.balance += Number(investment.amount);
+          investment.isMatured = true;
+          await investment.save();
+          await user.save();
+        });
+      }
+    });
+  });
+};
 
-
-module.exports ={
-    addinterest,
-    matureinvestment
-}
+module.exports = {
+  addinterest,
+  matureinvestment,
+};
