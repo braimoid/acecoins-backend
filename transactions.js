@@ -15,7 +15,7 @@ const addinterest = function addInterest() {
           let period = invest.interest.length + 1
           let nextdays = period * 10
           if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
-              interests = invest.amount * 0.15
+              interests = invest.amount * 0.1
               invest.interest.push(interests)
               User.findById(invest.user.id, async (err, user)=> {
                 user.profit += interests
@@ -32,7 +32,7 @@ const addinterest = function addInterest() {
           let period = invest.interest.length + 1
          let nextdays = period * 10
           if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
-              interests = invest.amount * 0.2
+              interests = invest.amount * 0.15
               invest.interest.push(interests)
               //change
               User.findById(invest.user.id, async (err, user)=> {
@@ -49,7 +49,7 @@ const addinterest = function addInterest() {
           let period = invest.interest.length + 1
      let nextdays = period * 10
           if(moment().format('MM-DD-YYYY') >=moment(invest.approvedAt).add(nextdays, 'days').format('MM-DD-YYYY')){
-              interests = invest.amount * 0.3
+              interests = invest.amount * 0.2
               invest.interest.push(interests)
               //change
               User.findById(invest.user.id, async (err, user)=> {
