@@ -36,15 +36,6 @@ const addinterest = function addInterest() {
           moment().format("MM-DD-YYYY") ==
           moment(invest.approvedAt).add(period, "months").format("MM-DD-YYYY")
         ) {
-          interests = invest.amount * 0.15;
-          invest.interest.push(interests);
-          //change
-          User.findById(invest.user.id, async (err, user) => {
-            user.profit += interests;
-            user.balance += interests;
-            await user.save();
-          });
-          await invest.save();
         }
       } else if (invest.amount >= 50000 && invest.interest.length < 9) {
         let interests;
