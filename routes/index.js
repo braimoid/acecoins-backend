@@ -390,7 +390,7 @@ router.get('/dashboard', middleware.isLoggedIn, (req, res) => {
           count = 0;
         }
         refscount = refs.length;
-        res.render('dashboard/dashboard', {
+        res.status(200).send({
           refCount: refscount,
           investment: count,
           investments,

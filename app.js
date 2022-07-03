@@ -31,6 +31,7 @@ mongoose.connect(
   }
 );
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 
 app.use(mongoSanitize());
@@ -71,7 +72,7 @@ app.use(adminRoutes);
 //runs when server restart
 //addinterest()
 
-cron.schedule(
+cron.schedule( 
   "0 0 * * *",
   () => {
     addinterest();
@@ -87,14 +88,24 @@ cron.schedule(
   () => {
     matureinvestment();
   },
-  {
+  { 
     scheduled: true,
     timezone: "Europe/Berlin",
   }
 );
 
+// const getUser = async () => {
+//   const users = await User.findOne({
+//     username: "belengaspar1975@hotmail.com",
+//   })
+//     .then((data) => console.log(data))
+//     .catch((error) => console.log(error));
+// };
+
+// getUser();
+
 app.get("*", function (req, res) {
-  res.render("404");
+  res.status(404);
 });
 app.listen(process.env.PORT || 8080, process.env.IP, function () {
   console.log("Server Has Started!");

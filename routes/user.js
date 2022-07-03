@@ -8,53 +8,57 @@ const { check, validationResult } = require("express-validator");
 const sendEmail = require("../helpers/SendEmail");
 
 router.get("/register", function (req, res) {
-    res.render("auth/register", { ref: req.query.ref });
+  // res.render("auth/register", { ref: req.query.ref }); // edited
+  res.status(200).json({ ref: req.query.ref }); // edited
 });
 router.get("/register/:username", function (req, res) {
-    res.render("auth/register", { username: req.params.username });
+  // res.render("auth/register", { username: req.params.username });// edited
+  res.status(200).json({ username: req.params.username }); // edited
 });
 
 router.post(
-    "/register",
-    [
-        check("password")
-            .isLength({ min: 8 })
-            .withMessage("Password must be at least 8 characters"),
-        check("firstName").isString().trim().escape(),
-        check("lastName").isString().trim().escape(),
-        check("username").isEmail().withMessage("Enter a Valid Email"),
-        check("pin")
-            .isDecimal()
-            .isLength({ min: 6, max: 6 })
-            .withMessage("Pin must be six digit"),
-    ],
-    function (req, res) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            errors.array().forEach((error) => {
-                req.flash("error", error.msg + "<br>");
-            });
-            return res.redirect("/register");
+  "/register",
+  [
+    check("password")
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters"),
+    check("firstName").isString().trim().escape(),
+    check("lastName").isString().trim().escape(),
+    check("username").isEmail().withMessage("Enter a Valid Email"),
+    check("pin")
+      .isDecimal()
+      .isLength({ min: 6, max: 6 })
+      .withMessage("Pin must be six digit"),
+  ],
+  function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      errors.array().forEach((error) => {
+        // req.flash("error", error.msg + "<br>"); //edited
+        return res.status(400).json({ errors: error.message() }); // edited
+      });
+      // return res.redirect("/register"); // edited
+    }
+    User.register(
+      new User({ username: req.body.username.toLowerCase() }),
+      req.body.password,
+      function (err, user) {
+        if (err) {
+          // req.flash("error", err.message); //edited
+          // return res.redirect("back"); // edited
+          return res.status(400).json({ errors: err.message }); // edited
         }
-        User.register(
-            new User({ username: req.body.username.toLowerCase() }),
-            req.body.password,
-            function (err, user) {
-                if (err) {
-                    req.flash("error", err.message);
-                    return res.redirect("back");
-                }
-                user.firstname = req.body.firstName;
-                user.lastname = req.body.lastName;
-                user.pin = req.body.pin;
-                user.referralId = short.generate();
-                user.referral = req.body.referral;
-                user.verifyToken = short.generate();
-                user.save();
-                sendEmail({
-                    email: user.username,
-                    subject: "Comfirm Email",
-                    message: `<!DOCTYPE html>
+        user.firstname = req.body.firstName;
+        user.lastname = req.body.lastName;
+        user.pin = req.body.pin;
+        user.referralId = short.generate();
+        user.referral = req.body.referral;
+        user.verifyToken = short.generate();
+        user.save();
+        sendEmail({
+          email: user.username,
+          subject: "Comfirm Email",
+          message: `<!DOCTYPE html>
           <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
           <head>
               <meta charset="utf-8">
@@ -175,52 +179,65 @@ router.post(
           </body>
           </html>
             `,
-                });
-                passport.authenticate("local")(req, res, function () {
-                    req.flash(
-                        "success",
-                        "Welcome. Confirmation Email has been sent to your email. Please confirm to verify your account"
-                    );
-                    res.redirect("/dashboard");
-                });
-            }
-        );
-    }
+        });
+        passport.authenticate("local")(req, res, function () {
+          // req.flash(
+          //     "success",
+          //     "Welcome. Confirmation Email has been sent to your email. Please confirm to verify your account"
+          // ); // edited
+          // res.redirect("/dashboard"); // edited
+          res.status(200).json({
+            message:
+              "Confirmation Email has been sent to your email. Please confirm to verify your account",
+          }); // edited
+        });
+      }
+    );
+  }
 );
 
 router.get("/login", function (req, res) {
-    res.render("auth/login", { message: req.flash("error") });
+  // res.render("auth/login", { message: req.flash("error") }); // edited
+  res.status(401).json({ message: "Authentication failed" }); // edited
 });
 
 router.post(
-    "/login",
-    [function fixEmail(req, res, next){req.body.username = req.body.username.toLowerCase(); next();}],
-    passport.authenticate("local", {
-        successRedirect: "/dashboard",
-        failureRedirect: "/login",
-        failureFlash: "Invalid Username or Password",
-        successFlash: "Welcome back",
-    }),
-    function (req, res) {}
+  "/login", (req, res, next) => {
+      // console.log(req.body.username)
+      req.body.username = req.body.username.toLowerCase();
+      next();
+      // res.send(req.body.username) 
+    },
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/login",
+    failureFlash: "Invalid Username or Password",
+    successFlash: "Welcome back",
+  }),
+  function (req, res) {}
 );
 
 router.get("/forget", (req, res) => {
-    res.render("auth/forget", { message: req.flash("error") });
+  // res.render("auth/forget", { message: req.flash("error") }); edited
+  res.status(200).json({ message: "Forget Password" });
 });
 router.post("/forget", async function (req, res) {
-    User.findOne({ username: req.body.email.toLowerCase() }, (err, user) => {
-        if (err || user === null) {
-            req.flash("error", "user not found please enter correct email");
-            return res.redirect("back");
-        }
-        user.resetToken = short.generate();
-        user.resetTokenExpiry = Date.now() + 3000000;
-        user.save();
+  User.findOne({ username: req.body.email.toLowerCase() }, (err, user) => {
+    if (err || user === null) {
+      // req.flash("error", "user not found please enter correct email"); // edited
+      // return res.redirect("back"); // edited
+      return res
+        .status(200)
+        .json({ message: "user not found please enter correct email" }); // edited
+    }
+    user.resetToken = short.generate();
+    user.resetTokenExpiry = Date.now() + 3000000;
+    user.save();
 
-        sendEmail({
-            email: user.username,
-            subject: "Password Reset",
-            message: `<!DOCTYPE html>
+    sendEmail({
+      email: user.username,
+      subject: "Password Reset",
+      message: `<!DOCTYPE html>
       <html
         lang="en"
         xmlns="http://www.w3.org/1999/xhtml"
@@ -424,67 +441,73 @@ router.post("/forget", async function (req, res) {
         </body>
       </html>
       `,
-        });
-
-        res.render("auth/resetSubmit", { email: user.username });
     });
+
+    // res.render("auth/resetSubmit", { email: user.username }); // edited
+    res.status(200).json({ email: user.username }); // edited
+  });
 });
 
 router.get("/reset/:resettoken", (req, res) => {
-    res.render("auth/resetPassword", { token: req.params.resettoken });
+  // res.render( "auth/resetPassword", { token: req.params.resettoken } ); // edited
+  res.status(200).json({ token: req.params.resettoken }); // edited
 });
 
 router.post(
-    "/resetPassword/:token",
-    [
-        check("password")
-            .isLength({ min: 8 })
-            .withMessage("Password must be at least 8 characters"),
-    ],
-    (req, res) => {
-        User.findOne({ resetToken: req.params.token }, (err, user) => {
-            if (err) {
-                return console.log(err);
-            }
+  "/resetPassword/:token",
+  [
+    check("password")
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters"),
+  ],
+  (req, res) => {
+    User.findOne({ resetToken: req.params.token }, (err, user) => {
+      if (err) {
+        return console.log(err);
+      }
 
-            if (Date.now() > user.resetTokenExpiry) {
-                req.flash("error", "Token  have expired");
-                return res.redirect("/login");
-            }
-            user.setPassword(req.body.password, (err, user) => {
-                if (err) {
-                    console.log(err);
-                }
-                user.save();
-            });
-            user.save();
-            res.redirect("/login");
-        });
-    }
+      if (Date.now() > user.resetTokenExpiry) {
+        // req.flash("error", "Token  have expired"); // edited
+        // return res.redirect("/login"); // edited
+        return res.status(400).json({ error: "Token have expired" }); // edited
+      }
+      user.setPassword(req.body.password, (err, user) => {
+        if (err) {
+          console.log(err);
+        }
+        user.save();
+      });
+      user.save();
+      // res.redirect("/login"); // edited
+      res.status(200).json({ message: "Password reset successfully" }); // edited
+    });
+  }
 );
 router.get("/logout", (request, response) => {
-    request.logout();
-    response.redirect("/");
+  request.logout();
+  response.redirect("/");
 });
 
 router.get("/confirm/:verifyToken", (req, res) => {
-    User.findOne({ verifyToken: req.params.verifyToken }, (err, user) => {
-        if (err) {
-            console.log(err);
-            req.flash("error", "Token does not exit or have expired");
-            res.redirect("/login");
-        }
-        user.userStatus = "Verified";
-        user.save();
-        console.log(user);
-        req.flash("success", "User has been successfully verified");
-        res.redirect("/dashboard");
-    });
+  User.findOne({ verifyToken: req.params.verifyToken }, (err, user) => {
+    if (err) {
+      console.log(err);
+      req.flash("error", "Token does not exit or have expired");
+      res.redirect("/login");
+    }
+    user.userStatus = "Verified";
+    user.save();
+    console.log(user);
+    // req.flash("success", "User has been successfully verified"); // edited
+    // res.redirect("/dashboard"); // edited
+    res.status(200).json({ message: "User has been successfully verified" });
+  });
 });
 
 router.get("/payments/success", middleware.isLoggedIn, (request, response) => {
-    request.flash("success", "Payment Successfull");
-    response.redirect("/dashboard");
+  // request.flash("success", "Payment Successfull"); // edited
+  // response.redirect("/dashboard"); // edited
+  response.status(200).json({ message: "Payment Successfull" });
 });
 
 module.exports = router;
