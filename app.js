@@ -24,7 +24,7 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://acecoins.herokuapp.com"],
     credentials: true,
   })
 );
@@ -41,11 +41,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 
-app.use(mongoSanitize());
+app.use( mongoSanitize() );
+// app.use(cookieParser());
+app.enable("trust proxy"); 
 app.use(
   session({
     secret: "Best friend",
     resave: false,
+    proxy: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     saveUninitialized: false,
     cookie: { secure: false },
