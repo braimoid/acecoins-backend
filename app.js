@@ -24,7 +24,11 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://acecoins.herokuapp.com"],
+    origin: [
+      "http://localhost:3000",
+      "https://acecoins.herokuapp.com",
+      "https://acecoins.netlify.app",
+    ],
     credentials: true,
   })
 );
@@ -41,9 +45,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 
-app.use( mongoSanitize() );
+app.use(mongoSanitize());
 // app.use(cookieParser());
-app.enable("trust proxy"); 
+app.enable("trust proxy");
 app.use(
   session({
     secret: "Best friend",
