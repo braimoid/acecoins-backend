@@ -50,8 +50,8 @@ app.use(
     resave: false,
     proxy: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    saveUninitialized: false,
-    cookie: { secure: false, sameSite: "none" },
+    saveUninitialized: true,
+    cookie: { secure: true, sameSite: "none" },
   })
 );
 
