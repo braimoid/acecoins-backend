@@ -3,22 +3,22 @@ middlewareObj.isLoggedIn = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  req.flash('error', 'Please login first');
-  res.redirect('/login');
+  // req.flash("error", "Please login first");
+  res.status(400).json({ message: "Please login first", error: true });
 };
 middlewareObj.isAdmin = function (req, res, next) {
   if (req.isAuthenticated()) {
-    if (req.user.role == 'admin') {
+    if (req.user.role == "admin") {
       return next();
     }
-    return res.redirect('/404');
+    return res.redirect("/404");
   }
-  req.flash('error', 'Please login first');
-  res.redirect('/login');
+  req.flash("error", "Please login first");
+  res.redirect("/login");
 };
 middlewareObj.sessionChecker = (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {
-    res.redirect('/dashboard');
+    res.redirect("/dashboard");
   } else {
     next();
   }

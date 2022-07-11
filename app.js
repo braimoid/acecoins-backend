@@ -8,6 +8,7 @@ const Notification = require("./models/notification");
 const localStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const app = express();
+var cors = require("cors");
 const cron = require("node-cron");
 const authRoutes = require("./routes/user");
 const userRoutes = require("./routes/index");
@@ -21,6 +22,12 @@ const { addinterest, matureinvestment } = require("./transactions");
 dotenv.config({});
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 mongoose.connect(
   "mongodb+srv://admin:madman2000@cluster0-xlo6v.mongodb.net/acess?retryWrites=true",
@@ -41,6 +48,7 @@ app.use(
     resave: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     saveUninitialized: false,
+    cookie: { secure: false },
   })
 );
 
@@ -72,7 +80,7 @@ app.use(adminRoutes);
 //runs when server restart
 //addinterest()
 
-cron.schedule( 
+cron.schedule(
   "0 0 * * *",
   () => {
     addinterest();
@@ -88,7 +96,7 @@ cron.schedule(
   () => {
     matureinvestment();
   },
-  { 
+  {
     scheduled: true,
     timezone: "Europe/Berlin",
   }

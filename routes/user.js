@@ -35,7 +35,7 @@ router.post(
     if (!errors.isEmpty()) {
       errors.array().forEach((error) => {
         // req.flash("error", error.msg + "<br>"); //edited
-        return res.status(400).json({ errors: error.message() }); // edited
+        // return res.status(400).json({ message: error.msg, error: true }); // edited
       });
       // return res.redirect("/register"); // edited
     }
@@ -46,7 +46,7 @@ router.post(
         if (err) {
           // req.flash("error", err.message); //edited
           // return res.redirect("back"); // edited
-          return res.status(400).json({ errors: err.message }); // edited
+          return res.status(400).json({ message: err.message, error: true }); // edited
         }
         user.firstname = req.body.firstName;
         user.lastname = req.body.lastName;
@@ -130,7 +130,7 @@ router.post(
                   }
               </style>
           
-          </head>
+          </head> 
           
           <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f5f6fa;">
             <center style="width: 100%; background-color: #f5f6fa;">
@@ -151,7 +151,7 @@ router.post(
                                               <p style="margin-bottom: 10px;">Welcome! <br> You are receiving this email because you have registered on our site.</p>
                                               <p style="margin-bottom: 10px;">Click the link below to active your Acecoins account.</p>
                                               <p style="margin-bottom: 25px;">This link will expire in 3 days and can only be used once.</p>
-                                              <a href="https://acecoins.uk/confirm/${user.verifyToken}" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px">Verify Email</a>
+                                              <a href="http://localhost:3000/confirm/${user.verifyToken}" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px">Verify Email</a>
                                           </td>
                                       </tr>
                                       <tr>
@@ -198,16 +198,24 @@ router.post(
 
 router.get("/login", function (req, res) {
   // res.render("auth/login", { message: req.flash("error") }); // edited
-  res.status(401).json({ message: "Authentication failed" }); // edited
+  res
+    .status(401)
+    .json({ message: "Invalid Username or Password", error: true }); // edited
+});
+
+router.get("/loginsuccess", function (req, res) {
+  // res.render("auth/login", { message: req.flash("error") }); // edited
+  res.status(200).json({ message: "Login Success", success: true }); // edited
 });
 
 router.post(
-  "/login", (req, res, next) => {
-      // console.log(req.body.username)
-      req.body.username = req.body.username.toLowerCase();
-      next();
-      // res.send(req.body.username) 
-    },
+  "/login",
+  (req, res, next) => {
+    // console.log(req.body.username)
+    req.body.username = req.body.username.toLowerCase();
+    next();
+    // res.send(req.body.username)
+  },
   passport.authenticate("local", {
     successRedirect: "/dashboard",
     failureRedirect: "/login",
@@ -219,7 +227,7 @@ router.post(
 
 router.get("/forget", (req, res) => {
   // res.render("auth/forget", { message: req.flash("error") }); edited
-  res.status(200).json({ message: "Forget Password" });
+  res.status(400).json({ message: "Forget Password" });
 });
 router.post("/forget", async function (req, res) {
   User.findOne({ username: req.body.email.toLowerCase() }, (err, user) => {
@@ -227,8 +235,11 @@ router.post("/forget", async function (req, res) {
       // req.flash("error", "user not found please enter correct email"); // edited
       // return res.redirect("back"); // edited
       return res
-        .status(200)
-        .json({ message: "user not found please enter correct email" }); // edited
+        .status(400)
+        .json({
+          message: "User not found please enter correct email",
+          error: true,
+        }); // edited
     }
     user.resetToken = short.generate();
     user.resetTokenExpiry = Date.now() + 3000000;
@@ -375,7 +386,7 @@ router.post("/forget", async function (req, res) {
                             Click On The link blow to reset tour password. Link expires in 5 mins
                           </p>
                           <a
-                            href="https://acecoins.uk/reset/${user.resetToken}"
+                            href="http://localhost:3000/reset/${user.resetToken}"
                             style="
                               background-color: #6576ff;
                               border-radius: 4px;
@@ -463,51 +474,64 @@ router.post(
   (req, res) => {
     User.findOne({ resetToken: req.params.token }, (err, user) => {
       if (err) {
+        res.status(400).json({ message: err.message, error: true });
         return console.log(err);
       }
 
       if (Date.now() > user.resetTokenExpiry) {
         // req.flash("error", "Token  have expired"); // edited
         // return res.redirect("/login"); // edited
-        return res.status(400).json({ error: "Token have expired" }); // edited
+        return res
+          .status(400)
+          .json({ message: "Token have expired", error: true }); // edited
       }
       user.setPassword(req.body.password, (err, user) => {
         if (err) {
           console.log(err);
+          res.status(400).json({ message: err.message, error: true });
         }
         user.save();
       });
       user.save();
       // res.redirect("/login"); // edited
-      res.status(200).json({ message: "Password reset successfully" }); // edited
+      res
+        .status(200)
+        .json({ message: "Password reset successfully", success: true }); // edited
     });
   }
 );
 router.get("/logout", (request, response) => {
   request.logout();
-  response.redirect("/");
+  response
+    .status(200)
+    .json({ message: "Logged out successfully", success: true });
 });
 
 router.get("/confirm/:verifyToken", (req, res) => {
   User.findOne({ verifyToken: req.params.verifyToken }, (err, user) => {
     if (err) {
       console.log(err);
-      req.flash("error", "Token does not exit or have expired");
-      res.redirect("/login");
+      // req.flash("error", "Token does not exit or have expired");
+      // res.redirect("/login");
+      res
+        .status(400)
+        .json({ error: true, message: "Token does not exit or have expired" });
     }
     user.userStatus = "Verified";
     user.save();
     console.log(user);
     // req.flash("success", "User has been successfully verified"); // edited
     // res.redirect("/dashboard"); // edited
-    res.status(200).json({ message: "User has been successfully verified" });
+    res
+      .status(200)
+      .json({ message: "User has been successfully verified", success: true });
   });
 });
 
 router.get("/payments/success", middleware.isLoggedIn, (request, response) => {
   // request.flash("success", "Payment Successfull"); // edited
   // response.redirect("/dashboard"); // edited
-  response.status(200).json({ message: "Payment Successfull" });
+  response.status(200).json({ message: "Payment Successfull", success: true });
 });
 
 module.exports = router;
