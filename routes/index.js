@@ -313,6 +313,7 @@ router.post("/invest", middleware.isLoggedIn, (req, res) => {
         plan: invest.plan,
         id: investment.id,
         success: true,
+        message: "An email has been sent to you with the details of your investment",
       });
     });
   } else {

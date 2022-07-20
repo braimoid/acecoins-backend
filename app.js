@@ -109,15 +109,15 @@ cron.schedule(
   }
 );
 
-// const getUser = async () => {
-//   const users = await User.findOne({
-//     username: "belengaspar1975@hotmail.com",
-//   })
-//     .then((data) => console.log(data))
-//     .catch((error) => console.log(error));
-// };
+const getUser = async () => {
+  const users = await User.findOne({
+    username: "jdfxtd@gmail.com",
+  })
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+};
 
-// getUser();
+getUser();
 
 app.get("*", function (req, res) {
   res.status(404);
