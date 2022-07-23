@@ -1,0 +1,29 @@
+.process-section {
+	@include thm-gradient();
+	padding: 115px 0;
+	.sec-title {
+		span, h2 {color: #fff;}
+		h2 {margin: 5px;}
+	}
+	.single-process {position: relative;
+		&.no-arrow {
+			&:before {display: none;}
+		}
+		&:before {
+			content: '';
+			width: 149px;
+			height: 20px;
+			background: transparent url(../img/process-arrow.png) 0 0 no-repeat;
+			position: absolute;
+			top:35px;
+			left: 80%;
+		}
+		.icon-box {display: inline-block;width: 90px;height: 90px;text-align: center;border-radius: 50%;background:#fff;position: relative; box-shadow: drop-shadow-converter(#2D2D2D, $angle: 135, $distance: 0px, $spread: 0, $size: 10px, $opacity: 20%);
+
+			i {font-size: 40px;line-height: 90px;color: #4C57E5;}
+			.count {color: #5C66EA;background:#fff;border-radius: 50%;width: 30px;height: 30px;text-align: center;line-height: 30px;position: absolute;top:-5px;right: 0; box-shadow: drop-shadow-converter(#2D2D2D, $angle: 135, $distance: 0px, $spread: 0, $size: 10px, $opacity: 20%);
+			}
+		}
+		h3 {color: #EFF0FD;font-family: 'Roboto';font-weight: bold;font-size: 21px;text-transform: uppercase;margin: 0;margin-top: 30px;}
+	}
+}

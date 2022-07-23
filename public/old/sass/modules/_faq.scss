@@ -1,0 +1,47 @@
+.faq-section {
+	background:#F7FBFD;
+	padding-bottom: 120px;
+	padding-top: 115px;
+	.sec-title {margin-bottom: 65px;
+		span {text-transform: uppercase;color: #2D2D2D;font-family: 'Roboto';font-weight: bold;margin-bottom: 10px;display: inline-block;}
+		h2 {margin: 0;color: #2D2D2D;font-weight: bold;font-size: 35px;font-family: 'Roboto';text-transform: uppercase;}
+	}
+	.accrodion-grp {
+		.accrodion {
+			background:#f4f9fd;
+			box-shadow: drop-shadow-converter(#4858EE, $angle: 135, $distance: 0px, $spread: 0, $size: 10px, $opacity: 20%);
+			+ .accrodion {margin-top: 25px;}
+			.accrodion-title {
+				padding: 34px 0;
+				padding-left: 30px;
+				padding-right: 30px;
+				cursor: pointer;
+				h4 {margin: 0;font-family: 'Roboto';font-weight: bold;font-size: 21px;color: #2D2D2D;position: relative;
+					&:before {
+						content: '';
+						background: transparent url(../img/accordion-close.png) center center no-repeat;
+						width: 40px;
+						height: 40px;
+						position: absolute;
+						top:50%;
+						right:0px;
+						transform: translateY(-50%);
+					}
+				}
+			}
+			.accrodion-content {
+				padding: 0px 0 23px;
+				padding-left: 30px;
+				padding-right: 65px;
+				margin-top: -10px;
+			}
+			&.active {
+				.accrodion-title {
+					h4:before {
+						background: transparent url(../img/accordion-open.png) center center no-repeat;
+					}
+				}
+			}
+		}
+	}
+}

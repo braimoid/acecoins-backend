@@ -1,0 +1,231 @@
+<% include ../partials/header %>
+<% include ../partials/header %>
+<% if (error && error.length > 0) { %>
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <%=error%>
+</div>
+<% } %> <% if (success && success.length > 0) { %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <%=success%>
+</div>
+<% } %>
+<!-- content @s -->
+<div class="nk-content nk-content-lg nk-content-fluid">
+  <div class="container-xl wide-lg">
+    <div class="nk-content-inner">
+      <div class="nk-content-body">
+        <div class="nk-block-head">
+          <div class="nk-block-head-content">
+            <div class="nk-block-head-sub"><a href="/me/plans" class="text-soft back-to"><em
+                  class="icon ni ni-arrow-left"> </em><span>My Investment</span></a></div>
+            <div class="nk-block-between-md g-4">
+              <div class="nk-block-head-content">
+                <h2 class="nk-block-title fw-normal"><%=investment.plan%></h2>
+                <div class="nk-block-des">
+                  <p><%=investment.title%> <span
+                      class="badge badge-outline badge-primary"><%=investment.status.toUpperCase()%></span>
+                  </p>
+                </div>
+              </div>
+              <div class="nk-block-head-content">
+                <ul class="nk-block-tools gx-3">
+                  <% if (currentUser.role == 'admin' && investment.isMaturable == true){%>
+                  <li class="order-md-last"><a href="/manage/pause/<%=investment.id%>" class="btn btn-info"><em
+                        class="icon ni ni-cross"></em>
+                      <span>Do not Mature</span> </a></li>
+                  <% } %>
+                  <% if (currentUser.role == 'admin' && investment.isMaturable == false){%>
+                  <li class="order-md-last"><a href="/manage/reactivate/<%=investment.id%>" class="btn btn-info"><em
+                        class="icon ni ni-cross"></em>
+                      <span>Enable Mature</span> </a></li>
+                  <% } %>
+                  <li><a href="/investment/<%=investment.id%>" class="btn btn-icon btn-light"><em
+                        class="icon ni ni-reload"></em></a></li>
+                  <% if (currentUser.role == 'admin'){%>
+                  <li class="order-md-last"><a href="/manage/cancel/<%=investment.id%>" class="btn btn-danger"><em
+                        class="icon ni ni-cross"></em>
+                      <span>Cancel Plan</span> </a></li>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div><!-- .nk-block-head -->
+        <div class="nk-block">
+          <div class="card card-bordered">
+            <div class="card-inner">
+              <div class="row gy-gs">
+                <div class="col-md-6">
+                  <div class="nk-iv-wg3">
+                    <div class="nk-iv-wg3-group flex-lg-nowrap gx-4">
+                      <div class="nk-iv-wg3-sub">
+                        <div class="nk-iv-wg3-amount">
+                          <div class="number"><%=investment.amount%> USD</div>
+                        </div>
+                        <div class="nk-iv-wg3-subtitle">Invested Amount</div>
+                      </div>
+                      <div class="nk-iv-wg3-sub">
+                        <span class="nk-iv-wg3-plus text-soft"><em class="icon ni ni-plus"></em></span>
+                        <div class="nk-iv-wg3-amount">
+                          <div class="number"><% let profit; if (investment.interest.length > 0){ %>
+                            <% profit = investment.interest.reduce((total, amount) => total + amount) %>
+                            <%=profit%>
+                            <%} else { %>
+                            <%= 0 %>
+                            <% } %>
+                            USD
+                          </div>
+                        </div>
+                        <div class="nk-iv-wg3-subtitle">Profit Earned</div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- .col -->
+                <div class="col-md-6 col-lg-4 offset-lg-2">
+                  <div class="nk-iv-wg3 pl-md-3">
+                    <div class="nk-iv-wg3-group flex-lg-nowrap gx-4">
+                      <div class="nk-iv-wg3-sub">
+                        <div class="nk-iv-wg3-amount">
+                          <div class="number"><%= investment.amount + (investment.percentage * investment.amount)%> USD
+                          </div>
+                        </div>
+                        <div class="nk-iv-wg3-subtitle">Total Return</div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- .col -->
+              </div><!-- .row -->
+            </div>
+            <div id="schemeDetails" class="nk-iv-scheme-details">
+              <ul class="nk-iv-wg3-list">
+                <li>
+                  <div class="sub-text">Term</div>
+                  <% if (investment.plan == 'Starter Plan'){ %>
+                  <div class="lead-text">1 Months</div>
+                  <%}else if (investment.plan == 'Silver Plan'){%>
+                  <div class="lead-text">2 Months</div>
+                  <%}else{ %>
+                  <div class="lead-text">3 months</div>
+                  <%} %>
+                </li>
+                <li>
+                  <div class="sub-text">Term start at</div>
+                  <div class="lead-text"><%=investment.approvedAt%></div>
+                </li>
+                <li>
+                  <div class="sub-text">Term end at</div>
+                  <div class="lead-text"><%=investment.endDate%></div>
+                </li>
+                <li>
+                  <div class="sub-text">Monthly Interest</div>
+                  <% if (investment.plan == 'Starter Plan'){ %>
+                  <div class="lead-text"><%= investment.percentage * 100 /3%>%</div>
+                  <%}else if (investment.plan == 'Silver Plan'){%>
+                  <div class="lead-text"><%= investment.percentage * 100 / 2%>%</div>
+                  <%}else{ %>
+                  <div class="lead-text"><%= investment.percentage * 100 / 3%>%</div>
+                  <%} %>
+
+                </li>
+              </ul><!-- .nk-iv-wg3-list -->
+              <ul class="nk-iv-wg3-list">
+                <li>
+                  <div class="sub-text">Ordered date</div>
+                  <div class="lead-text"><%=investment.approvedAt%></div>
+                </li>
+                <li>
+                  <div class="sub-text">Approved date</div>
+                  <div class="lead-text"><%=investment.approvedAt%></div>
+                </li>
+                <li>
+                  <div class="sub-text">Payment method</div>
+                  <div class="lead-text">Acecoins Wallet</div>
+                </li>
+                <li>
+                  <div class="sub-text">Paid <small>(fee include)</small></div>
+                  <div class="lead-text"><span class="currency currency-usd">USD
+                    </span><%=investment.amount + (investment.amount * 0.005)%></div>
+                </li>
+              </ul><!-- .nk-iv-wg3-list -->
+              <ul class="nk-iv-wg3-list">
+                <li>
+                  <div class="sub-text">Captial invested</div>
+                  <div class="lead-text"><span class="currency currency-usd">USD </span><%=investment.amount%></div>
+                </li>
+                <li>
+                  <div class="sub-text">Monthly profit</div>
+                  <% if (investment.plan == 'Starter Plan'){ %>
+                  <div class="lead-text"><span class="currency currency-usd">USD
+                    </span><%=investment.amount * ( investment.percentage )%>
+                  </div>
+                  <%}else if (investment.plan == 'Silver Plan'){%>
+                  <div class="lead-text"><span class="currency currency-usd">USD
+                    </span><%=investment.amount * (investment.percentage /2)%>
+                  </div>
+                  <%}else{ %>
+                  <div class="lead-text"><span class="currency currency-usd">USD
+                    </span><%=investment.amount * (investment.percentage  /3)%>
+                  </div>
+                  <%} %>
+
+                </li>
+                <li>
+                  <div class="sub-text">Net profit</div>
+                  <div class="lead-text"><span class="currency currency-usd">USD
+                    </span><%= (investment.percentage * investment.amount)%>
+                  </div>
+                </li>
+                <li>
+                  <div class="sub-text">Total return</div>
+                  <div class="lead-text"><span class="currency currency-usd">USD
+                    </span><%= investment.amount + (investment.percentage * investment.amount)%>
+                  </div>
+                </li>
+              </ul><!-- .nk-iv-wg3-list -->
+            </div><!-- .nk-iv-scheme-details -->
+          </div>
+        </div><!-- .nk-block -->
+
+        <div class="nk-block nk-block-lg">
+          <div class="nk-block-head">
+            <h5 class="nk-block-title">Transactions</h5>
+          </div>
+          <div class="card card-bordered">
+            <table class="table table-iv-tnx">
+              <thead class="thead-light">
+                <tr>
+                  <th class="tb-col-type"><span class="overline-title">Type</span></th>
+                  <th class="tb-col-date"><span class="overline-title">Date</span></th>
+                  <th class="tb-col-time tb-col-end"><span class="overline-title">Amount</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="tb-col-type"><span class="sub-text">Investment</span></td>
+                  <td class="tb-col-date"><span class="sub-text"><%=investment.approvedAt%></span></td>
+                  <td class="tb-col-time tb-col-end"><span class="lead-text text-danger">- <%=investment.amount%></span>
+                  </td>
+                </tr>
+                <% investment.interest.forEach((interest) => { %>
+                <tr>
+                  <% if (investment.plan == 'Starter Plan'){ %>
+                  <td class="tb-col-type"><span class="sub-text">Profit - 10%</span></td>
+                  ` <%}else if (investment.plan == 'Silver plan'){%>
+                  <td class="tb-col-type"><span class="sub-text">Profit - 15%</span></td>
+                  <%}else{ %>
+                  <td class="tb-col-type"><span class="sub-text">Profit - 20%</span></td>
+                  <%} %>
+                  <td class="tb-col-date"><span class="sub-text"></span></td>
+                  <td class="tb-col-time tb-col-end"><span class="lead-text">+ <%=interest%></span></td>
+                </tr>
+                <%})%>
+              </tbody>
+            </table>
+          </div><!-- .card -->
+        </div><!-- .nk-block -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- content @e -->
+<% include ../partials/detail-footer %>

@@ -1,0 +1,112 @@
+
+
+body {
+    font-family: 'Open Sans';
+    color: rgba(#2D2D2D,.8);
+    font-size: 16px;
+    line-height: 24px;
+}
+
+a:hover,
+a:visited,
+a:focus,
+a:active {
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+.thm-container {
+    max-width: 1140px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.sec-pad {
+    padding: 115px 0 120px;
+}
+
+.p0 {
+    padding: 0 !important;
+}
+
+.pt0 {
+    padding-top: 0;
+}
+.pb0 {
+    padding-bottom: 0 !important;
+}
+
+.gray-bg {
+    background:#F4F9FD;
+}
+
+.sec-title {margin-bottom: 50px;
+    span {color: #2D2D2D;font-family: 'Roboto';font-size: 16px;text-transform: uppercase;font-weight: bold;}
+    h2 {margin: 0;color: #2D2D2D;font-family: 'Roboto';font-weight: bold;font-size: 27px;margin-top: 10px;margin-bottom: 15px;text-transform: uppercase;}
+    p {margin: 0;color: rgba(#2D2D2D,.8);font-size: 16px;}
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    background:#4C57E5;
+    color: #fff;
+    font-size: 15px;
+    line-height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    box-shadow: drop-shadow-converter(#000000, $angle: 90, $distance: 23px, $spread: 0, $size: 42px, $opacity: 20%);
+}
+
+.preloader {
+    background-color: #4F5FEF;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999999;
+    .spinner {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -30px;
+        margin-left: -30px;
+        background-color: #fff;
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+    }
+
+    @-webkit-keyframes sk-scaleout {
+        0% {
+            -webkit-transform: scale(0)
+        }
+        100% {
+            -webkit-transform: scale(1.0);
+            opacity: 0;
+        }
+    }
+    @keyframes sk-scaleout {
+        0% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+        100% {
+            -webkit-transform: scale(1.0);
+            transform: scale(1.0);
+            opacity: 0;
+        }
+    }
+}

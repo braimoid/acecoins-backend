@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
+<head>
+	<base href="../">
+	<meta charset="utf-8">
+	<meta name="author" content="Softnio">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description"
+		content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+	<!-- Fav Icon  -->
+	<link rel="shortcut icon" href="/images/favicon.png">
+	<!-- Page Title  -->
+	<title>Acecoins</title>
+	<!-- StyleSheets  -->
+	<link rel="stylesheet" href="/assets/css/dashlite.css?ver=1.9.1">
+	<link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=1.9.1">
+</head>
+
+<body class="nk-body npc-default has-apps-sidebar has-sidebar ">
+	<!-- main @s -->
+	<div class="nk-main ">
+		<!-- wrap @s -->
+		<div class="nk-wrap ">
+			<!-- content @s -->
+			<div class="nk-content ">
+				<div class="container-fluid">
+					<div class="nk-content-inner">
+						<div class="nk-content-body">
+
+							<div class="col-xl-12 col-xxl-8">
+								<div class="card card-bordered card-full">
+									<div class="card-inner border-bottom">
+										<div class="card-title-group">
+											<div class="card-title">
+												<h6 class="title">All Users</h6>
+											</div>
+
+										</div>
+									</div>
+									<div class="nk-tb-list">
+										<div class="nk-tb-item nk-tb-head">
+											<div class="nk-tb-col"><span>Plan</span></div>
+											<div class="nk-tb-col tb-col-sm"><span>Who</span></div>
+											<div class="nk-tb-col"><span>Date</span></div>
+											<div class="nk-tb-col tb-col-sm"><span>Amount</span></div>
+											<div class="nk-tb-col"><span>&nbsp;</span></div>
+										</div>
+										<% investments.forEach((investment) => {%>
+										<div class="nk-tb-item">
+											<div class="nk-tb-col">
+												<div class="align-center">
+													<span class="tb-sub ml-2"><%=investment.plan%></span>
+												</div>
+											</div>
+											<div class="nk-tb-col tb-col-sm">
+												<div class="user-card">
+													<div class="user-avatar user-avatar-xs bg-pink-dim">
+														<span><%=investment.user.firstname[0].toUpperCase()%><%=investment.user.lastname[0].toUpperCase()%></span>
+													</div>
+													<div class="user-name">
+														<span class="tb-lead"><%= investment.user.firstname%>
+															<%=investment.user.lastname%></span>
+													</div>
+												</div>
+											</div>
+
+											<div class="nk-tb-col">
+												<span class="tb-sub tb-amount"><%=investment.approvedAt%> <span>USD</span></span>
+											</div>
+											<div class="nk-tb-col tb-col-sm">
+												<span class="tb-sub text-failure"><%=investment.status%></span>
+
+											</div>
+											<div class="nk-tb-col nk-tb-col-action">
+												<div class="dropdown">
+													<a class="text-soft dropdown-toggle btn btn-sm btn-icon btn-trigger"
+														data-toggle="dropdown"><em class="icon ni ni-chevron-right"></em></a>
+													<div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
+														<ul class="link-list-plain">
+															<li><a href="/investment/<%=investment.id%>">View</a></li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+										<%})%>
+
+									</div><!-- .card -->
+								</div><!-- .col -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- content @e -->
+	</div>
+	<!-- wrap @e -->
+	</div>
+	<!-- main @e -->
+	</div>
+	<!-- app-root @e -->
+	<!-- JavaScript -->
+	<script src="/assets/js/bundle.js?ver=1.9.1"></script>
+	<script src="/assets/js/scripts.js?ver=1.9.1"></script>
+	<script src="/assets/js/charts/gd-invest.js?ver=1.9.1"></script>
+</body>
+
+</html>

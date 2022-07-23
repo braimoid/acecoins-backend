@@ -1,0 +1,42 @@
+<% include ./partials/old-header%>
+
+<section class="get-in-touch" id="contact">
+
+    <div class="google-map" id="contact-google-map"></div>
+
+    <div class="thm-container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-content">
+                    <div class="inner">
+                        <div class="title text-center">
+                            <h3>Get in touch</h3>
+                            <p>Send us a message and we'll respond as <br /> soon as possible </p>
+                        </div><!-- /.title -->
+                        <form action="inc/sendemail.php" class="contact-form">
+                            <div class="frm-grp">
+                                <input type="text" name="name" placeholder="Your Name" />
+                            </div><!-- /.frm-grp -->
+                            <div class="frm-grp">
+                                <input type="text" name="phone" placeholder="Phone no." />
+                            </div><!-- /.frm-grp -->
+                            <div class="frm-grp">
+                                <input type="text" name="email" placeholder="Email Address" />
+                            </div><!-- /.frm-grp -->
+                            <div class="frm-grp">
+                                <textarea name="message" placeholder="Message"></textarea>
+                                <span class="c-count">180 characters left</span>
+                            </div><!-- /.frm-grp -->
+                            <div class="frm-grp">
+                                <button type="submit">Send Message</button>
+                            </div><!-- /.frm-grp -->
+                            <div class="form-result"></div><!-- /.form-result -->
+                        </form>
+                    </div><!-- /.inner -->
+                </div><!-- /.form-content -->
+            </div><!-- /.col-md-5 -->
+        </div><!-- /.row -->
+    </div><!-- /.thm-container -->
+</section><!-- /.get-in-touch -->
+
+<% include ./partials/footer%>

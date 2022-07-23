@@ -1,0 +1,133 @@
+<% include ../partials/header %>
+<% if (error && error.length > 0) { %>
+<div class="alert alert-danger alert-dismissible" role="alert">
+  <%=error%>
+</div>
+<% } %> <% if (success && success.length > 0) { %>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <%=success%>
+</div>
+<% } %>
+<!-- content @s -->
+<div class="nk-content nk-content-lg nk-content-fluid">
+  <div class="container-xl wide-lg">
+    <div class="nk-content-inner">
+      <div class="nk-content-body">
+        <div class="nk-block-head nk-block-head-lg">
+          <div class="nk-block-head-content">
+            <div class="nk-block-head-sub"><a href="/dashboard" class="back-to"><em
+                  class="icon ni ni-arrow-left"></em><span>Back to Dashboard</span></a></div>
+            <div class="nk-block-head-content">
+              <h2 class="nk-block-title fw-normal">Withdraw</h2>
+            </div>
+          </div>
+        </div><!-- nk-block-head -->
+        <div class="nk-block invest-block">
+          <form action="/wallet/withdraw" class="invest-form" method="POST" autocomplete="off">
+            <div class="row g-gs">
+              <div class="col-lg-7">
+                <div class="invest-field form-group">
+                  <div class="form-label-group">
+                    <label class="form-label">Choose Quick Amount to Withdraw</label>
+                  </div>
+                  <div class="invest-amount-group g-2">
+                    <div class="invest-amount-item">
+                      <input type="radio" class="invest-amount-control" value="500" name="amount" id="iv-amount-1">
+                      <label class="invest-amount-label" for="iv-amount-1">$ 500</label>
+                    </div>
+                    <div class="invest-amount-item">
+                      <input type="radio" class="invest-amount-control" value="1000" name="amount" id="iv-amount-2">
+                      <label class="invest-amount-label" for="iv-amount-2">$ 1000</label>
+                    </div>
+                    <div class="invest-amount-item">
+                      <input type="radio" class="invest-amount-control" value="5000" name="amount" id="iv-amount-3">
+                      <label class="invest-amount-label" for="iv-amount-3">$ 5000</label>
+                    </div>
+                    <div class="invest-amount-item">
+                      <input type="radio" class="invest-amount-control" value="10000" name="amount" id="iv-amount-4">
+                      <label class="invest-amount-label" for="iv-amount-4">$ 10,000</label>
+                    </div>
+                    <div class="invest-amount-item">
+                      <input type="radio" class="invest-amount-control" value="15000" name="amount" id="iv-amount-5">
+                      <label class="invest-amount-label" for="iv-amount-5">$ 15,000</label>
+                    </div>
+                    <div class="invest-amount-item">
+                      <input type="radio" class="invest-amount-control" value="20000" name="amount" id="iv-amount-6">
+                      <label class="invest-amount-label" for="iv-amount-6">$ 20,000</label>
+                    </div>
+                  </div>
+                </div><!-- .invest-field -->
+                <div class="invest-field form-group">
+                  <div class="form-label-group">
+                    <label class="form-label">Or Enter Your Amount</label>
+
+                  </div>
+                  <div class="form-control-group">
+                    <div class="form-info">USD</div>
+                    <input type="text" class="form-control form-control-amount form-control-lg" id="custom-amount"
+                      name="amount1" placeholder="100.00">
+                  </div>
+                </div>
+
+                <div class="invest-field form-group">
+                  <div class="form-label-group">
+                    <label class="form-label">BTC Address</label>
+
+                  </div>
+                  <div class="form-control-group">
+
+                    <input type="text" class="form-control form-control-amount form-control-lg" id="custom-btc"
+                      name="address">
+                  </div>
+                </div>
+                <!-- .invest-field -->
+
+                <div class="invest-field form-group">
+                  <div class="custom-control custom-control-xs custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="checkbox">
+                    <label class="custom-control-label" for="checkbox">I agree the <a href="/terms">terms and &amp;
+                        conditions.</a></label>
+                  </div>
+                  <div class="nk-iv-wg4-sub text-center bg-lighter" id="submit-div">
+                    <a href="#" class="btn btn-lg btn-primary ttu" data-toggle="modal"
+                      data-target="#invest-plan">Confirm &amp; proceed</a>
+                  </div>
+                </div><!-- .invest-field -->
+              </div><!-- .col -->
+            </div><!-- .row -->
+            <div class="modal fade" tabindex="-1" id="invest-plan">
+              <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content">
+                  <div class="modal-body modal-body-md text-center">
+                    <div class="nk-modal">
+                      <h4 class="nk-modal-title">Confirm Your Withdrawal</h4>
+                      <div class="nk-modal-text">
+                        <p>Please enter your Wallet Pin code in order complete the
+                          Withdraw or
+                          cancel.</p>
+                      </div>
+                      <div class="nk-modal-form">
+                        <div class="form-group">
+                          <input type="password" name='pin' autocomplete="off"
+                            class="form-control form-control-password-big text-center">
+                        </div>
+                      </div>
+                      <div class="nk-modal-action">
+                        <button href="#" type="submit" class="btn btn-lg btn-mw btn-primary">Confirm Withdrawal</button>
+                        <a href="/wallet/withdraw" class="link link-soft" data-dismiss="modal">Cancel and return</a>
+                      </div>
+                    </div>
+                  </div><!-- .modal-body -->
+                </div><!-- .modal-content -->
+              </div><!-- .modla-dialog -->
+            </div><!-- .modal -->
+          </form>
+        </div><!-- .nk-block -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- content @e -->
+
+<% include ../partials/footer %></div>

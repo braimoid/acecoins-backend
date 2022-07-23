@@ -1,0 +1,114 @@
+<div class="nk-footer nk-auth-footer-full">
+  <div class="container wide-lg">
+    <div class="row g-3">
+      <div class="col-lg-6 order-lg-last">
+        <ul class="nav nav-sm justify-content-center justify-content-lg-end">
+          <li class="nav-item">
+            <a class="nav-link" href="/terms">Terms & Condition</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="faq">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact us</a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <div class="nk-block-content text-center text-lg-left">
+          <p class="text-soft">&copy; 2020 Acecoins. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- wrap @e -->
+</div>
+<!-- content @e -->
+</div>
+<!-- main @e -->
+</div>
+<!-- app-root @e -->
+
+<!-- JavaScript -->
+<script>
+  let amount = 0
+  let monthlyProfit = 0
+  let netProfit = 0
+  let netReturn = 0
+  let f = 0
+
+  let pay = document.querySelector('#pay')
+  let profit = document.querySelector('#profit')
+  let to_invest = document.querySelector('#to-invest')
+  let fee = document.querySelector('#fee')
+  let total = document.querySelector('#total')
+  let term = Number(document.querySelector('#term').innerHTML)
+  let net_return = document.querySelector('#net-return')
+  let net_profit = document.querySelector('#net-profit')
+  let percentage = document.querySelector('#interest').innerHTML
+  const form = document.querySelector('form')
+  document.querySelectorAll(".invest-amount-group .invest-amount-item input").forEach(item => {
+    item.addEventListener('click', event => {
+      amount = Number(event.target.value)
+      monthlyProfit = (amount * percentage) / 100
+      profit.innerHTML = monthlyProfit
+      netProfit = Number(monthlyProfit * term/10)
+      net_profit.innerHTML = netProfit
+      netReturn = Number(amount + netProfit)
+      net_return.innerHTML = netReturn
+      to_invest.innerHTML = amount
+      f = amount * 0.005
+      fee.innerHTML = f
+      total.innerHTML = f + amount
+      pay.innerHTML = f + amount
+    })
+  })
+
+  document.querySelector('#money').addEventListener('keyup', event => {
+    amount = Number(event.target.value)
+    monthlyProfit = (amount * percentage) / 100
+    profit.innerHTML = monthlyProfit
+    netProfit = Number(monthlyProfit * term)
+    net_profit.innerHTML = netProfit/10
+    netReturn = Number(amount + netProfit)
+    net_return.innerHTML = netReturn
+    to_invest.innerHTML = amount
+    f = amount * 0.005
+    fee.innerHTML = f
+    total.innerHTML = f + amount
+    pay.innerHTML = f + amount
+  })
+
+  form.addEventListener('submit', event => {
+    e.preventdefault()
+    console.log('submit')
+  })
+
+  const checkbox = document.getElementById('checkbox')
+  const link = document.querySelector('#submit-div')
+  link.innerHTML = `<button href="#" class="btn btn-lg btn-primary ttu" id="submit-btn" data-toggle="modal"
+    data - target="#invest-plan" disabled> Confirm & proceed</button>'`
+
+
+  checkbox.addEventListener('click', () => {
+    if (checkbox.checked == true) {
+      link.innerHTML = `<a href="#" class="btn btn-lg btn-primary ttu" id="submit-btn" data-toggle="modal"
+                        data-target="#invest-plan">Confirm &amp; proceed</a>`
+    }
+    else {
+      link.innerHTML = `<button href="#" class="btn btn-lg btn-primary ttu" id="submit-btn" data-toggle="modal"
+    data - target="#invest-plan" disabled> Confirm & proceed</button>'`
+    }
+  })
+
+
+</script>
+<script src="./assets/js/bundle.js?ver=1.9.2"></script>
+<script src="./assets/js/scripts.js?ver=1.9.2"></script>
+<script src="./assets/js/charts/chart-invest.js?ver=1.9.2"></script>
+</body>
+
+</html>

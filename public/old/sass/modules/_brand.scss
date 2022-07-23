@@ -1,0 +1,13 @@
+.brand-section {
+	background:#4F5FF0;
+	padding-bottom: 280px;
+	padding-top: 115px;
+	.title {margin-bottom: 55px;
+		h2 {margin: 0;color: #FFFEFE;font-family: 'Roboto';font-size: 27px;font-weight: bold;text-transform: uppercase;}
+	}
+	.owl-theme .owl-nav {margin-top: 60px;display: none;}
+	.owl-theme .owl-nav [class*="owl-"] {padding: 0;margin: 0;width: 30px;height: 30px;background:#fff;color: #2d2d2d;font-size: 15px;line-height: 30px;border-radius: 3px;transition: all .4s ease;
+		&:hover {background:#2d2d2d;color: #fff;}
+	}
+	.owl-theme .owl-nav .owl-next {margin-left: 20px;}
+}

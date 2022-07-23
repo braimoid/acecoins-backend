@@ -1,0 +1,10 @@
+.why-choose-us {
+	.thm-container {max-width: 920px;}
+}
+.single-why-choose {	
+	+ .single-why-choose {margin-top: 40px;}
+	h3 {margin: 0;color: #535EE7;font-size: 27px;font-family: 'Roboto';text-transform: uppercase;font-weight: bold;margin-bottom: 20px;}
+	p {margin: 0;margin-bottom: 25px;}
+	a {color: #4C57E5;text-decoration: underline;}
+	.text-box {padding: 78px 0;}
+}

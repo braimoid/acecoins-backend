@@ -1,0 +1,31 @@
+.our-news-letter {
+	.thm-container {
+		padding-bottom: 120px;
+		.inner {
+			margin-top: -160px;
+			background:#fff;
+			border-radius: 10px;
+			padding-top: 55px;
+			box-shadow: drop-shadow-converter(#2D2D2D, $angle: 135, $distance: 0px, $spread: 0, $size: 10px, $opacity: 20%);
+			.sec-title {margin-bottom: 50px;
+				span {color: #2D2D2D;font-family: 'Roboto';font-size: 16px;text-transform: uppercase;}
+				h2 {margin: 0;color: #2D2D2D;font-family: 'Roboto';font-weight: bold;font-size: 27px;margin-top: 10px;margin-bottom: 15px;text-transform: uppercase;}
+				p {margin: 0;color: rgba(#2D2D2D,.8);font-size: 16px;}
+			}
+			form.news-letter {
+				max-width: 920px;
+				margin-left: auto;
+				margin-right: auto;
+				padding-bottom: 60px;
+				label.error {display: none !important;}
+				input {width: 100%;max-width: 349px;float: left;height: 48px;border: none;outline: none;border-bottom: 1px solid #C2C3C9;color: rgba(#2D2D2D,.8);font-size: 16px;margin-right: 30px;padding-left: 18px;
+					&.error {background:rgba(red,.2);}
+					@include placeholder {color: rgba(#2D2D2D,.8);}
+				}
+				button {border: none;outline: none;background:#4959EE;color: rgba(#fff,.8);font-size: 16px;text-transform: uppercase;font-weight: bold;border-radius: 20px;padding: 12px 49.35px;transition: all .4s ease;
+					&:hover {background:#2d2d2d;}
+				}
+			}
+		}
+	}
+}
