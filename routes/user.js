@@ -212,7 +212,6 @@ router.post(
   "/login",
   (req, res, next) => {
     // console.log(req.body.username)
-    res.set("Access-Control-Allow-Origin", "*");
     req.body.username = req.body.username.toLowerCase();
     next();
     // res.send(req.body.username)
