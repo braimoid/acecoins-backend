@@ -387,7 +387,7 @@ router.post("/forget", async function (req, res) {
                             Click On The link blow to reset tour password. Link expires in 5 mins
                           </p>
                           <a
-                            href="http://localhost:3000/reset/${user.resetToken}"
+                            href="https://acecoins.uk/reset/${user.resetToken}"
                             style="
                               background-color: #6576ff;
                               border-radius: 4px;
