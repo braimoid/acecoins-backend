@@ -27,8 +27,8 @@ app.use(
     origin: [
       // "http://localhost:3000",
       "https://acecoins.netlify.app",
-      "https://acecoins.uk/",
-      "https://acecoins.onrender.com/",
+      "https://acecoins.uk",
+      "https://acecoins.onrender.com",
     ],
     credentials: true,
   })
