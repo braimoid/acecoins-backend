@@ -25,9 +25,10 @@ app.set("view engine", "ejs");
 app.use(
   cors({
     origin: [
-      "http://localhost:3000",
-      "https://acecoins.herokuapp.com",
+      // "http://localhost:3000",
       "https://acecoins.netlify.app",
+      "https://acecoins.uk/",
+      "https://acecoins.onrender.com/",
     ],
     credentials: true,
   })
