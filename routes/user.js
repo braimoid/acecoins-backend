@@ -151,7 +151,7 @@ router.post(
                                               <p style="margin-bottom: 10px;">Welcome! <br> You are receiving this email because you have registered on our site.</p>
                                               <p style="margin-bottom: 10px;">Click the link below to active your Acecoins account.</p>
                                               <p style="margin-bottom: 25px;">This link will expire in 3 days and can only be used once.</p>
-                                              <a href="http://localhost:3000/confirm/${user.verifyToken}" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px">Verify Email</a>
+                                              <a href="https://acecoins.uk/confirm/${user.verifyToken}" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px">Verify Email</a>
                                           </td>
                                       </tr>
                                       <tr>
@@ -386,7 +386,7 @@ router.post("/forget", async function (req, res) {
                             Click On The link blow to reset tour password. Link expires in 5 mins
                           </p>
                           <a
-                            href="http://localhost:3000/reset/${user.resetToken}"
+                            href="https://acecoins.uk/reset/${user.resetToken}"
                             style="
                               background-color: #6576ff;
                               border-radius: 4px;
