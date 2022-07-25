@@ -22,19 +22,17 @@ const { addinterest, matureinvestment } = require("./transactions");
 dotenv.config({});
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-app.use(cors());
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Headers, *, Access-Control-Allow-Origin",
-    "Origin, X-Requested-with, Content_Type,Accept,Authorization",
-    "https://acecoins.uk"
-  );
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "PUT,POST,PATCH,DELETE,GET");
-    return res.status(200).json({ ok: true });
-  }
-  next();
-});
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://acecoins.netlify.app",
+      "https://acecoins.uk",
+      "https://acecoins.onrender.com",
+    ],
+    credentials: true,
+  })
+)
 
 mongoose.connect(
   "mongodb+srv://admin:madman2000@cluster0-xlo6v.mongodb.net/acess?retryWrites=true",
@@ -113,9 +111,7 @@ cron.schedule(
 );
 
 const getUser = async () => {
-  const users = await User.findOne({
-    username: "jdfxtd@gmail.com",
-  })
+  const users = await User.find()
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
 };
