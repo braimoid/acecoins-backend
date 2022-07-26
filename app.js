@@ -26,6 +26,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "http://localhost:3001",
       "https://acecoins.netlify.app",
       "https://acecoins.uk",
       "https://acecoins.onrender.com",
