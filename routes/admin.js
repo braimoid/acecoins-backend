@@ -82,15 +82,26 @@ router.get('/admin', middleware.isAdmin, (req, res) => {
             }
 
 
-            res.render('admin/index', {
-                count,
-                investments,
-                withdrawalsAmount,
-                investmentAmount,
-                activeAmount,
-                activeInvestment,
-                maturedInvestment,
-                PaidWithdrawal,
+            // res.render('admin/index', {
+            //     count,
+            //     investments,
+            //     withdrawalsAmount,
+            //     investmentAmount,
+            //     activeAmount,
+            //     activeInvestment,
+            //     maturedInvestment,
+            //     PaidWithdrawal,
+            // });
+
+            res.status(200).json({
+              count: count,
+              investments: investments,
+              withdrawalsAmount: withdrawalsAmount,
+              investmentAmount: investmentAmount,
+              activeAmount: activeAmount,
+              activeInvestment: activeInvestment,
+              maturedInvestment: maturedInvestment,
+              PaidWithdrawal: PaidWithdrawal,
             });
 
         })

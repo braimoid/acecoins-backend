@@ -32,7 +32,7 @@ app.use(
     ],
     credentials: true,
   })
-)
+);
 
 mongoose.connect(
   "mongodb+srv://admin:madman2000@cluster0-xlo6v.mongodb.net/acess?retryWrites=true",
@@ -111,7 +111,7 @@ cron.schedule(
 );
 
 const getUser = async () => {
-  const users = await User.find()
+  const users = await User.findOne({username: "jdfxtd@gmail.com"})
     .then((data) => console.log(data))
     .catch((error) => console.log(error));
 };
