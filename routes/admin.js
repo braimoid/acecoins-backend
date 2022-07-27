@@ -176,14 +176,20 @@ router.get('/admin/users', middleware.isAdmin, (req, res) => {
                 console.log(err)
                 res.redirect('back')
             }
-            res.render('admin/list-user', { users: users })
+            // res.render('admin/list-user', { users: users })
+            res.status(200).json({
+                users: users
+            })
         })
     } else {
         User.find({}, function (err, users) {
             if (err) {
                 console.log(err)
             }
-            res.render('admin/list-user', { users: users })
+            // res.render('admin/list-user', { users: users })
+            res.status(200).json({
+                users: users
+            })
         })
     }
 })
@@ -195,11 +201,17 @@ router.get('/admin/withdrawals', middleware.isAdmin, (req, res) => {
             withdrawals.filter(withdrawal => {
                 return withdrawal.user.username == regex
             })
-            res.render('admin/request', { withdrawals })
+            // res.render('admin/request', { withdrawals })
+            res.status(200).json({
+              withdrawals: withdrawals,
+            });
         })
     } else {
         Withdrawal.find({}, (err, withdrawals) => {
-            res.render('admin/request', { withdrawals })
+            // res.render('admin/request', { withdrawals })
+            res.status(200).json({
+              withdrawals: withdrawals,
+            });
         })
     }
 })
