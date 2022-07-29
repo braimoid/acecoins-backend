@@ -313,7 +313,8 @@ router.post("/invest", middleware.isLoggedIn, (req, res) => {
         plan: invest.plan,
         id: investment.id,
         success: true,
-        message: "An email has been sent to you with the details of your investment",
+        message:
+          "An email has been sent to you with the details of your investment",
       });
     });
   } else {
@@ -382,7 +383,8 @@ router.get("/investment/:investmentId", middleware.isLoggedIn, (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.render("dashboard/invest-details", { investment });
+    // res.render("dashboard/invest-details", { investment });
+    res.status(200).json({ investment });
   });
 });
 

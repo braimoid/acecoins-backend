@@ -112,12 +112,13 @@ router.get('/manage/pause/:investmentId', middleware.isAdmin, (req, res) => {
     Investments.findById(req.params.investmentId, (err, investment) => {
         investment.isMaturable = false
         investment.save()
-    })
-    req.flash(
-        'success',
-        'INvestment has been updated, will not mature'
-    );
-    res.redirect('back');
+    } )
+    res.status( 200 ).json( {message:"INvestment has been updated, will not mature"} )
+    // req.flash(
+    //     'success',
+    //     'INvestment has been updated, will not mature'
+    // );
+    // res.redirect('back');
 })
 
 router.get('/manage/cancel/:investmentId', middleware.isAdmin, (req, res) => {
@@ -147,23 +148,33 @@ router.get('/manage/cancel/:investmentId', middleware.isAdmin, (req, res) => {
         investment.save()
 
     })
-    req.flash(
-        'success',
-        'Investment has been updated, Investment will not accumulate Profit'
-    );
-    res.redirect('back');
+    // req.flash(
+    //     'success',
+    //     'Investment has been updated, Investment will not accumulate Profit'
+    // );
+    // res.redirect('back');
+    res
+      .status(200)
+      .json({
+        message:
+          "Investment has been updated, Investment will not accumulate Profit",
+      });
 })
 
-router.get('manage/reactivate/=investment.id', middleware.isAdmin, (req, res) => {
+router.get('manage/reactivate/:investment.id', middleware.isAdmin, (req, res) => {
     Investments.findById(req.params.investmentId, (err, investment) => {
         investment.isMaturable = true
         investment.save()
     })
-    req.flash(
-        'success',
-        'INvestment has been updated, Investment will not accumulate Profit'
-    );
-    res.redirect('back');
+    // req.flash(
+    //     'success',
+    //     'INvestment has been updated, Investment will not accumulate Profit'
+    // );
+    // res.redirect('back');
+    res.status(200).json({
+      message:
+        "Investment has been updated, Investment will accumulate Profit",
+    });
 })
 
 router.get('/admin/users', middleware.isAdmin, (req, res) => {
