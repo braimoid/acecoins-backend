@@ -161,7 +161,7 @@ router.get('/manage/cancel/:investmentId', middleware.isAdmin, (req, res) => {
       });
 })
 
-router.get('manage/reactivate/:investment.id', middleware.isAdmin, (req, res) => {
+router.get('manage/reactivate/:investmentId', middleware.isAdmin, (req, res) => {
     Investments.findById(req.params.investmentId, (err, investment) => {
         investment.isMaturable = true
         investment.save()
