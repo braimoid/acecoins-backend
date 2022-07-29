@@ -384,7 +384,7 @@ router.get("/investment/:investmentId", middleware.isLoggedIn, (req, res) => {
       console.log(err);
     }
     // res.render("dashboard/invest-details", { investment });
-    res.status(200).json({ investment });
+    res.status(200).json({ investment: investment });
   });
 });
 
