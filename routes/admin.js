@@ -402,11 +402,12 @@ router.get('/admin/withdrawal/decline/:withdrawalId', middleware.isAdmin, (req, 
         })
         request.save()
 
-        req.flash(
-            'error',
-            'Payment has been decline'
-        );
-        res.redirect('back');
+        // req.flash(
+        //     'error',
+        //     'Payment has been decline'
+        // );
+        // res.redirect('back');
+        res.status(200).json({ message: "Payment has been decline" });
     })
 })
 router.get('/admin/withdrawal/pay/:withdrawalId', middleware.isAdmin, (req, res) => {
@@ -551,11 +552,12 @@ router.get('/admin/withdrawal/pay/:withdrawalId', middleware.isAdmin, (req, res)
         })
         request.save()
 
-        req.flash(
-            'success',
-            'Payment has been Paid'
-        );
-        res.redirect('back');
+        // req.flash(
+        //     'success',
+        //     'Payment has been Paid'
+        // );
+        // res.redirect('back');
+        res.status(200).json({ message: "Payment has been Paid" });
     })
 })
 router.get('/admin/fund/:userId', (req, res) => {
