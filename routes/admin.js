@@ -246,7 +246,8 @@ router.get("/admin/activate/:userId", middleware.isAdmin, (req, res) => {
 
 router.get("/admin/investments/:userId", middleware.isAdmin, (req, res) => {
   Investments.find({ "user.id": req.params.userId }, (err, investments) => {
-    res.render("admin/manage-invest", { investments });
+    // res.render("admin/manage-invest", { investments });
+    res.status(200).json({ investments: investments });
   });
 });
 
