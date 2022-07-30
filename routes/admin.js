@@ -229,16 +229,18 @@ router.get("/admin/deactivate/:userId", middleware.isAdmin, (req, res) => {
   User.findById(req.params.userId, (err, user) => {
     user.userStatus = "Deactivated";
     user.save();
-    req.flash("success", "User has been deactivated");
-    res.redirect("back");
+    // req.flash("success", "User has been deactivated");
+    // res.redirect("back");
+    res.status(200).json({ message: "User has been deactivated" });
   });
 });
 router.get("/admin/activate/:userId", middleware.isAdmin, (req, res) => {
   User.findById(req.params.userId, (err, user) => {
     user.userStatus = "Verified";
     user.save();
-    req.flash("success", "User has been Verified");
-    res.redirect("back");
+    // req.flash("success", "User has been Verified");
+    //   res.redirect( "back" );
+    res.status(200).json({ message: "User has been Verified" });
   });
 });
 
