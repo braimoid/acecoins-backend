@@ -211,7 +211,7 @@ router.get("/loginsuccess", function (req, res) {
 router.post(
   "/login",
   (req, res, next) => {
-    // console.log(req.body.username)
+    console.log(req.body.username);
     req.body.username = req.body.username.toLowerCase();
     next();
     // res.send(req.body.username)
@@ -234,12 +234,10 @@ router.post("/forget", async function (req, res) {
     if (err || user === null) {
       // req.flash("error", "user not found please enter correct email"); // edited
       // return res.redirect("back"); // edited
-      return res
-        .status(400)
-        .json({
-          message: "User not found please enter correct email",
-          error: true,
-        }); // edited
+      return res.status(400).json({
+        message: "User not found please enter correct email",
+        error: true,
+      }); // edited
     }
     user.resetToken = short.generate();
     user.resetTokenExpiry = Date.now() + 3000000;

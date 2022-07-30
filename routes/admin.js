@@ -1024,11 +1024,19 @@ router.post("/invest/:userId", middleware.isAdmin, async (req, res) => {
         
         </html>`,
       });
-      res.render("dashboard/invest-confirm", {
-        amount: invest.amount,
-        plan: invest.plan,
-        id: investment.id,
-      });
+    //   res.render("dashboard/invest-confirm", {
+    //     amount: invest.amount,
+    //     plan: invest.plan,
+    //     id: investment.id,
+    //   });
+        res.status(200).json({
+          amount: invest.amount,
+          plan: invest.plan,
+          id: investment.id,
+          success: true,
+          message:
+            "An email has been sent to you with the details of your investment",
+        });
     });
   } else {
     req.flash("error", "incorrect pin");
