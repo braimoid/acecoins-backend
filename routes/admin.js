@@ -203,9 +203,9 @@ router.get("/admin/users", middleware.isAdmin, (req, res) => {
   }
 });
 
-router.get("/admin/withdrawals", middleware.isAdmin, (req, res) => {
-  if (req.query.search) {
-    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+router.get("/admin/withdrawals/:email", middleware.isAdmin, (req, res) => {
+  if (req.params.email) {
+    const regex = new RegExp(escapeRegex(req.params.email), "gi");
     Withdrawal.find({}, (err, withdrawals) => {
       withdrawals.filter((withdrawal) => {
         return withdrawal.user.username == regex;
@@ -1038,23 +1038,24 @@ router.post("/invest/:userId", middleware.isAdmin, async (req, res) => {
         
         </html>`,
       });
-    //   res.render("dashboard/invest-confirm", {
-    //     amount: invest.amount,
-    //     plan: invest.plan,
-    //     id: investment.id,
-    //   });
-        res.status(200).json({
-          amount: invest.amount,
-          plan: invest.plan,
-          id: investment.id,
-          success: true,
-          message:
-            "An email has been sent to you with the details of your investment",
-        });
+      //   res.render("dashboard/invest-confirm", {
+      //     amount: invest.amount,
+      //     plan: invest.plan,
+      //     id: investment.id,
+      //   });
+      res.status(200).json({
+        amount: invest.amount,
+        plan: invest.plan,
+        id: investment.id,
+        success: true,
+        message:
+          "An email has been sent to you with the details of your investment",
+      });
     });
   } else {
-    req.flash("error", "incorrect pin");
-    res.redirect("back");
+    // req.flash("error", "incorrect pin");
+    // res.redirect("back");
+    res.status(400).json({ message: "incorrect pin" });
   }
 });
 
