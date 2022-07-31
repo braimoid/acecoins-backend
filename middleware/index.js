@@ -11,10 +11,11 @@ middlewareObj.isAdmin = function (req, res, next) {
     if (req.user.role == "admin") {
       return next();
     }
-    return res.redirect("/404");
+    res.status(400).json({ message: "Please login first", error: true });
   }
-  req.flash("error", "Please login first");
-  res.redirect("/login");
+  // req.flash("error", "Please login first");
+  // res.redirect("/login");
+  res.status(400).json({ message: "Please login first", error: true });
 };
 middlewareObj.sessionChecker = (req, res, next) => {
   if (req.session.user && req.cookies.user_sid) {

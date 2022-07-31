@@ -97,8 +97,12 @@ router.post("/invest", middleware.isLoggedIn, (req, res) => {
     percentage = 0.3;
   }
   if (req.body.plan == "Diamond Plan" && amount < 50000) {
-    req.flash("error", "Minimum Investment for selected plan is $50000");
-    return res.redirect("back");
+    // req.flash("error", "Minimum Investment for selected plan is $50000");
+    // return res.redirect("back");
+    return res.status(400).json({
+      error: true,
+      message: "Minimum Investment for selected plan is $50000",
+    });
   }
   if (req.body.plan == "Silver Plan" && (amount < 5000 || amount > 49999)) {
     // req.flash(
@@ -313,7 +317,8 @@ router.post("/invest", middleware.isLoggedIn, (req, res) => {
         plan: invest.plan,
         id: investment.id,
         success: true,
-        message: "An email has been sent to you with the details of your investment",
+        message:
+          "An email has been sent to you with the details of your investment",
       });
     });
   } else {
@@ -382,7 +387,8 @@ router.get("/investment/:investmentId", middleware.isLoggedIn, (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.render("dashboard/invest-details", { investment });
+    // res.render("dashboard/invest-details", { investment });
+    res.status(200).json({ investment: investment });
   });
 });
 
