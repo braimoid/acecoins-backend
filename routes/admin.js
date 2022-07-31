@@ -846,7 +846,7 @@ router.post("/invest/:userId", middleware.isAdmin, async (req, res) => {
       message: "Investment for selected plan is between $5000 and $49999",
     });
   }
-  if (req.body.plan == "Starter Plan" && (amount < 500 || amount > 4999)) {
+  if (req.body.plan == "Starter Plan" && (amount < 100 || amount > 4999)) {
     // req.flash(
     //   "error",
     //   "Investment for selected plan is between $100 and $4999"
