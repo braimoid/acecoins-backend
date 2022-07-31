@@ -829,22 +829,32 @@ router.post("/invest/:userId", middleware.isAdmin, async (req, res) => {
     percentage = 0.45;
   }
   if (req.body.plan == "Diamond Plan" && amount < 50000) {
-    req.flash("error", "Minimum Investment for selected plan is $50000");
-    return res.redirect("back");
+    // req.flash("error", "Minimum Investment for selected plan is $50000");
+    // return res.redirect("back");
+    return res.status(400).json({
+      error: true,
+      message: "Minimum Investment for selected plan is $50000",
+    });
   }
   if (req.body.plan == "Silver Plan" && (amount < 5000 || amount > 49999)) {
-    req.flash(
-      "error",
-      "Investment for selected plan is between $5000 and $49999"
-    );
-    return res.redirect("back");
+    // req.flash(
+    //   "error",
+    //   "Investment for selected plan is between $5000 and $49999"
+    // );
+    return res.status(400).json({
+      error: true,
+      message: "Investment for selected plan is between $5000 and $49999",
+    });
   }
   if (req.body.plan == "Starter Plan" && (amount < 500 || amount > 4999)) {
-    req.flash(
-      "error",
-      "Investment for selected plan is between $500 and $4999"
-    );
-    return res.redirect("back");
+    // req.flash(
+    //   "error",
+    //   "Investment for selected plan is between $100 and $4999"
+    // );
+    return res.status(400).json({
+      error: true,
+      message: "Investment for selected plan is between $100 and $4999",
+    });
   }
   if (req.body.pin == currentUser.pin) {
     let invest = {
@@ -857,11 +867,15 @@ router.post("/invest/:userId", middleware.isAdmin, async (req, res) => {
       percentage,
     };
     if (req.user.balance < invest.amount || req.user.balance == 0) {
-      req.flash(
-        "error",
-        "Insufficient Balance. Please fund User  wallet to make this Transaction"
-      );
-      return res.redirect("back");
+      // req.flash(
+      //   "error",
+      //   "Insufficient Balance. Please fund your wallet to make this Transaction"
+      // );
+      return res.status(400).json({
+        error: true,
+        message:
+          "Insufficient Balance. Please fund your wallet to make this Transaction",
+      });
     }
     Investments.create(invest, function (err, investment) {
       if (err) {
