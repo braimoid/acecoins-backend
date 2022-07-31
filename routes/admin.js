@@ -203,9 +203,9 @@ router.get("/admin/users", middleware.isAdmin, (req, res) => {
   }
 });
 
-router.get("/admin/withdrawals/:email", middleware.isAdmin, (req, res) => {
-  if (req.params.email) {
-    const regex = new RegExp(escapeRegex(req.params.email), "gi");
+router.get("/admin/withdrawals", middleware.isAdmin, (req, res) => {
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
     Withdrawal.find({}, (err, withdrawals) => {
       withdrawals.filter((withdrawal) => {
         return withdrawal.user.username == regex;
