@@ -417,7 +417,7 @@ router.get(
         Notification.create({}, (err, notification) => {
           if (err) {
           }
-          notification.message = `your deposit of $${request.amount} was declined`;
+          notification.message = `your deposit of $${request.amount} was paid`;
           notification.user.id = request.user.id;
           notification.save();
         });

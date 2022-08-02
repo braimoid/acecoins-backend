@@ -328,6 +328,7 @@ router.post("/invest", middleware.isLoggedIn, (req, res) => {
   }
 });
 
+
 router.get("/me/plans", middleware.isLoggedIn, function (req, res) {
   Investments.find({ "user.id": req.user.id }).exec((err, investments) => {
     if (err) {
