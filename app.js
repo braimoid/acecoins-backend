@@ -13,6 +13,7 @@ const cron = require("node-cron");
 const authRoutes = require("./routes/user");
 const userRoutes = require("./routes/index");
 const adminRoutes = require("./routes/admin");
+const academyRoutes = require("./routes/academy");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -85,6 +86,7 @@ app.use(async function (req, res, next) {
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(adminRoutes);
+app.use("/academy", academyRoutes);
 
 //runs when server restart
 //addinterest()
@@ -117,7 +119,7 @@ const getUser = async () => {
     .catch((error) => console.log(error));
 };
 
-getUser();
+// getUser();
 
 app.get("*", function (req, res) {
   res.status(404);
