@@ -7,7 +7,7 @@ router.get("/", (req, res, next) => {
   res.status(200).json("Academy route working successfully");
 });
 
-router.post("/post", async (req, res, next) => {
+router.post("/post", middleware.isAdmin, async (req, res, next) => {
   const title = req.body.title;
   const moduleNo = req.body.module;
   const content = req.body.content;
@@ -28,7 +28,7 @@ router.post("/post", async (req, res, next) => {
   }
 });
 
-router.get("/post", async (req, res, next) => {
+router.get("/post", middleware.isLoggedIn, async (req, res, next) => {
   let posts = await Academy.find();
   res.status(200).json(posts);
 });
