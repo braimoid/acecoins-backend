@@ -31,6 +31,7 @@ app.use(
       "https://acecoins.netlify.app",
       "https://acecoins.uk",
       "https://acecoins.onrender.com",
+      "https://academy.acecoins.uk"
     ],
     credentials: true,
   })
