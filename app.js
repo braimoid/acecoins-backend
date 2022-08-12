@@ -55,7 +55,7 @@ app.enable("trust proxy");
 app.use(
   session({
     secret: "Best friend",
-    resave: false,
+    resave: true,
     proxy: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     saveUninitialized: true,
@@ -87,7 +87,7 @@ app.use(async function (req, res, next) {
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(adminRoutes);
-app.use("/academy", academyRoutes);
+app.use(academyRoutes);
 
 //runs when server restart
 //addinterest()
@@ -120,7 +120,7 @@ const getUser = async () => {
     .catch((error) => console.log(error));
 };
 
-getUser();
+// getUser();
 
 app.get("*", function (req, res) {
   res.status(404);
