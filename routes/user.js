@@ -225,23 +225,6 @@ router.post(
   function (req, res) {}
 );
 
-router.post(
-  "/login/academy",
-  (req, res, next) => {
-    // console.log(req.body.username);
-    req.body.username = req.body.username.toLowerCase();
-    next();
-    // res.send(req.body.username)
-  },
-  passport.authenticate("local", {
-    successRedirect: "/academy/post",
-    failureRedirect: "/login",
-    failureFlash: "Invalid Username or Password",
-    successFlash: "Welcome back",
-  }),
-  function (req, res) {}
-);
-
 router.get("/forget", (req, res) => {
   // res.render("auth/forget", { message: req.flash("error") }); edited
   res.status(400).json({ message: "Forget Password" });

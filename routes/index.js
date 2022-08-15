@@ -449,6 +449,7 @@ router.get("/dashboard", middleware.isLoggedIn, (req, res) => {
           pin: req.user.pin,
           email: req.user.username,
           notifications: res.locals.notifications,
+          user: req.user,
         });
       });
     });
