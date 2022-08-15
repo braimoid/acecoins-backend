@@ -1,17 +1,22 @@
 var middlewareObj = {};
-middlewareObj.isLoggedIn = function (req, res, next) {
+middlewareObj.isLoggedIn = function ( req, res, next )
+{
+  // console.log(req.user);
   if (req.isAuthenticated()) {
     return next();
   }
   // req.flash("error", "Please login first");
   res.status(400).json({ message: "Please login first", error: true });
 };
-middlewareObj.isAdmin = function (req, res, next) {
-  if (req.isAuthenticated()) {
+middlewareObj.isAdmin = function ( req, res, next )
+{
+  // console.log(req.user);
+  if ( req.isAuthenticated() )
+  {
     if (req.user.role == "admin") {
       return next();
     }
-    res.status(400).json({ message: "Please login first", error: true });
+    res.status(400).json({ message: "Please login as admin first", error: true });
   }
   // req.flash("error", "Please login first");
   // res.redirect("/login");

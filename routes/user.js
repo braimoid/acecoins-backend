@@ -211,7 +211,7 @@ router.get("/loginsuccess", function (req, res) {
 router.post(
   "/login",
   (req, res, next) => {
-    console.log(req.body.username);
+    // console.log(req.body.username);
     req.body.username = req.body.username.toLowerCase();
     next();
     // res.send(req.body.username)
