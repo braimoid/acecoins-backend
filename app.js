@@ -19,6 +19,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoSanitize = require("express-mongo-sanitize");
 const { addinterest, matureinvestment } = require("./transactions");
+var Academy = require("./models/academy");
 
 dotenv.config({});
 app.use(express.static(__dirname + "/public"));
@@ -115,9 +116,13 @@ cron.schedule(
 );
 
 const getUser = async () => {
-  const users = await User.findOne({ username: "floursula206@gmail.com" })
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
+  // const users = await User.findOne({ username: "floursula206@gmail.com" })
+  //   .then((data) => console.log(data))
+  //   .catch((error) => console.log(error));
+
+    // const academy = await Academy.findOneAndDelete({ module: 3 })
+    // .then((data) => console.log(data))
+    // .catch((error) => console.log(error));
 };
 
 // getUser();
