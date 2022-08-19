@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const AcademySchema = new mongoose.Schema({
   module: Number,
-  topic: String,
+  title: String,
   content: String,
   plan: Array,
   createdAt: { type: Date, default: Date.now() },
