@@ -11,8 +11,14 @@ router.post("/academy/post", async (req, res, next) => {
   const title = req.body.title;
   const subtitle = req.body.subtitle;
   const content = req.body.content;
-  const plan = req.body.plan;
+  const plans = req.body.plan;
   const tutor = req.body.tutor;
+  let plan;
+
+  if (plans.toLowerCase() === "starter") plan = ["Starter"];
+  if (plans.toLowerCase() === "silver") plan = ["Starter", "Silver"];
+  if (plans.toLowerCase() === "diamond")
+    plan = ["Starter", "Silver", "Diamond"];
 
   const post = new Academy({
     title: title,
