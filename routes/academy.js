@@ -9,15 +9,17 @@ router.get("/academy", (req, res, next) => {
 
 router.post("/academy/post", async (req, res, next) => {
   const title = req.body.title;
-  const moduleNo = req.body.module;
+  const subtitle = req.body.subtitle;
   const content = req.body.content;
   const plan = req.body.plan;
+  const tutor = req.body.tutor;
 
   const post = new Academy({
     title: title,
-    module: moduleNo,
+    subtitle: subtitle,
     content: content,
     plan: plan,
+    tutor: tutor,
   });
 
   try {

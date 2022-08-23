@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const AcademySchema = new mongoose.Schema({
-  module: Number,
+  subtitle: String,
+  tutor: String,
   title: String,
   content: String,
   plan: Array,
