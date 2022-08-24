@@ -120,7 +120,7 @@ const getUser = async () => {
   //   .then((data) => console.log(data))
   //   .catch((error) => console.log(error));
 
-    // const academy = await Academy.findOneAndDelete({ module: 3 })
+    // const academy = await Academy.findOneAndDelete({ module: 1 })
     // .then((data) => console.log(data))
     // .catch((error) => console.log(error));
 };

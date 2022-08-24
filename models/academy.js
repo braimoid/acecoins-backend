@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const AcademySchema = new mongoose.Schema({
   subtitle: String,
+  topic: String,
   tutor: String,
   title: String,
   content: String,
