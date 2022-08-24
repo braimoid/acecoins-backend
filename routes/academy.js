@@ -9,7 +9,7 @@ router.get("/academy", (req, res, next) => {
 
 router.post("/academy/post", async (req, res, next) => {
   const title = req.body.title;
-  const subtitle = req.body.subtitle;
+  const subtopic = req.body.subtopic;
   const content = req.body.content;
   const plans = req.body.plan;
   const tutor = req.body.tutor;
@@ -24,7 +24,7 @@ router.post("/academy/post", async (req, res, next) => {
   const post = new Academy({
     title: title,
     topic: topic,
-    subtitle: subtitle,
+    subtopic: subtopic,
     content: content,
     plan: plan,
     tutor: tutor,
