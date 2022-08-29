@@ -94,7 +94,7 @@ app.use(academyRoutes);
 //addinterest()
 
 cron.schedule(
-  "0 1 * * *",
+  "0 0 * * *",
   () => {
     addinterest();
   },
