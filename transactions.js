@@ -10,12 +10,16 @@ const addinterest = function addInterest() {
 
     investment.forEach(async (invest) => {
       if (invest.amount <= 4999 && invest.interest.length < 3) {
+        // console.log(new Date(invest.approvedAt).toISOString().split("T")[0]);
+        // console.log(invest.approvedAt);
         let interests;
         let period = invest.interest.length + 1;
         let nextdays = period * 10;
         if (
           moment().format("MM-DD-YYYY") >=
-          moment(invest.approvedAt).add(nextdays, "days").format("MM-DD-YYYY")
+          moment(new Date(invest.approvedAt))
+            .add(nextdays, "days")
+            .format("MM/DD/YYYY")
         ) {
           interests = invest.amount * 0.1;
           invest.interest.push(interests);
@@ -59,7 +63,7 @@ const addinterest = function addInterest() {
         }
       }
     });
-    //console.log(investment);
+    // console.log(investment);
   });
 };
 
