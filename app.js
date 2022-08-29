@@ -94,7 +94,7 @@ app.use(academyRoutes);
 //addinterest()
 
 cron.schedule(
-  "0 0 * * *",
+  "0 1 * * *",
   () => {
     addinterest();
   },
@@ -120,7 +120,10 @@ const getUser = async () => {
   //   .then((data) => console.log(data))
   //   .catch((error) => console.log(error));
 
-    // const academy = await Academy.findOneAndDelete({ module: 1 })
+    // const academy = await Academy.findOneAndDelete({ title: 'Forex Trading'})
+    // .then((data) => console.log(data))
+    // .catch((error) => console.log(error));
+    //  const academy = await Academy.find()
     // .then((data) => console.log(data))
     // .catch((error) => console.log(error));
 };
