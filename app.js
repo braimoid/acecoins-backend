@@ -44,6 +44,9 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+  },
+  () => {
+    console.log("Connected to DB");
   }
 );
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -91,10 +94,10 @@ app.use(adminRoutes);
 app.use(academyRoutes);
 
 //runs when server restart
-// addinterest();
+addinterest();
 
 cron.schedule(
-  "0 */6 * * *",
+  "0 0 * * *",
   () => {
     addinterest();
   },
