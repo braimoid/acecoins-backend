@@ -94,7 +94,7 @@ app.use(adminRoutes);
 app.use(academyRoutes);
 
 //runs when server restart
-addinterest();
+// addinterest();
 
 cron.schedule(
   "0 0 * * *",
@@ -121,8 +121,8 @@ cron.schedule(
 const getUser = async () => {
   // const users = await User.findOne({ username: "jdfxtd@gmail.com" })
   //   .then((data) => console.log(data))
-  //   .catch((error) => console.log(error));
-  // const academy = await Academy.findOneAndDelete({ title: 'CryptoCurrency'})
+  // //   .catch((error) => console.log(error));
+  // const academy = await Academy.findOneAndDelete({ title: 'Forex'})
   // .then((data) => console.log(data))
   // .catch((error) => console.log(error));
   //  const academy = await Academy.find()
