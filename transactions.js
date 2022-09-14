@@ -9,18 +9,19 @@ const addinterest = function addInterest() {
     }
 
     investment.forEach(async (invest) => {
+      // console.log(invest)
       if (invest.amount <= 4999 && invest.interest.length < 3) {
-        // console.log(new Date(invest.approvedAt).toISOString().split("T")[0]);
-        // console.log(invest.approvedAt);
         let interests;
         let period = invest.interest.length + 1;
         let nextdays = period * 10;
+        // console.log(invest)
         if (
           moment().format("MM-DD-YYYY") >=
           moment(new Date(invest.approvedAt))
             .add(nextdays, "days")
-            .format("MM/DD/YYYY")
+            .format("MM-DD-YYYY")
         ) {
+          // console.log(invest.user.username);
           interests = invest.amount * 0.1;
           invest.interest.push(interests);
           User.findById(invest.user.id, async (err, user) => {
@@ -40,8 +41,18 @@ const addinterest = function addInterest() {
         let nextdays = period * 10;
         if (
           moment().format("MM-DD-YYYY") >=
-          moment(invest.approvedAt).add(nextdays, "days").format("MM-DD-YYYY")
+          moment(new Date(invest.approvedAt))
+            .add(nextdays, "days")
+            .format("MM-DD-YYYY")
         ) {
+          interests = invest.amount * 0.1;
+          invest.interest.push(interests);
+          User.findById(invest.user.id, async (err, user) => {
+            user.profit += interests;
+            user.balance += interests;
+            await user.save();
+          });
+          await invest.save();CT
         }
       } else if (invest.amount >= 50000 && invest.interest.length < 9) {
         let interests;
@@ -49,7 +60,9 @@ const addinterest = function addInterest() {
         let nextdays = period * 10;
         if (
           moment().format("MM-DD-YYYY") >=
-          moment(invest.approvedAt).add(nextdays, "days").format("MM-DD-YYYY")
+          moment(new Date(invest.approvedAt))
+            .add(nextdays, "days")
+            .format("MM-DD-YYYY")
         ) {
           interests = invest.amount * 0.2;
           invest.interest.push(interests);
@@ -74,6 +87,8 @@ const matureinvestment = function matureInvestment() {
     }
 
     investments.forEach((investment) => {
+      // console.log(investment);
+
       if (
         investment.amount < 5000 &&
         investment.interest.length == 3 &&
@@ -87,9 +102,9 @@ const matureinvestment = function matureInvestment() {
         });
       } else if (
         investment.amount >= 5000 &&
-        investment.amount > 50000 &&
-        investment.length == 6 &&
-        investment.isMature === false
+        investment.amount < 50000 &&
+        investment.interest.length == 6 &&
+        investment.isMatured === false
       ) {
         User.findById(investment.user.id, async (err, user) => {
           user.balance += Number(investment.amount);
@@ -99,8 +114,8 @@ const matureinvestment = function matureInvestment() {
         });
       } else if (
         investment.amount >= 50000 &&
-        investment.length == 9 &&
-        investment.isMature === false
+        investment.interest.length == 9 &&
+        investment.isMatured === false
       ) {
         User.findById(investment.user.id, async (err, user) => {
           user.balance += Number(investment.amount);

@@ -32,7 +32,7 @@ app.use(
       "https://acecoins.netlify.app",
       "https://acecoins.uk",
       "https://acecoins.onrender.com",
-      "https://academy.acecoins.uk"
+      "https://academy.acecoins.uk",
     ],
     credentials: true,
   })
@@ -91,7 +91,7 @@ app.use(adminRoutes);
 app.use(academyRoutes);
 
 //runs when server restart
-// addinterest()
+// addinterest();
 
 cron.schedule(
   "0 0 * * *",
@@ -116,17 +116,15 @@ cron.schedule(
 );
 
 const getUser = async () => {
-  // const users = await User.findOne({ username: "floursula206@gmail.com" })
+  // const users = await User.findOne({ username: "jdfxtd@gmail.com" })
   //   .then((data) => console.log(data))
   //   .catch((error) => console.log(error));
-
-    // const academy = await Academy.findOneAndDelete({ title: 'CryptoCurrency'})
-    // .then((data) => console.log(data))
-    // .catch((error) => console.log(error));
-  
-    //  const academy = await Academy.find()
-    // .then((data) => console.log(data))
-    // .catch((error) => console.log(error));
+  // const academy = await Academy.findOneAndDelete({ title: 'CryptoCurrency'})
+  // .then((data) => console.log(data))
+  // .catch((error) => console.log(error));
+  //  const academy = await Academy.find()
+  // .then((data) => console.log(data))
+  // .catch((error) => console.log(error));
 };
 
 // getUser();
