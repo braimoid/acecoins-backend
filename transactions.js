@@ -9,19 +9,16 @@ const addinterest = function addInterest() {
     }
 
     investment.forEach(async (invest) => {
-      // console.log(invest)
       if (invest.amount <= 4999 && invest.interest.length < 3) {
         let interests;
         let period = invest.interest.length + 1;
         let nextdays = period * 10;
-        // console.log(invest)
         if (
           moment().format("MM-DD-YYYY") >=
           moment(new Date(invest.approvedAt))
             .add(nextdays, "days")
             .format("MM-DD-YYYY")
         ) {
-          // console.log(invest.user.username);
           interests = invest.amount * 0.1;
           invest.interest.push(interests);
           User.findById(invest.user.id, async (err, user) => {
