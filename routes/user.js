@@ -16,6 +16,14 @@ router.get("/register/:username", function (req, res) {
   res.status(200).json({ username: req.params.username }); // edited
 });
 
+router.post("/delete", async (req, res, next) => {
+  await User.findByIdAndDelete(req.body.id)
+    .then((data) =>
+      res.status(200).json({ message: "User deleted successfully" })
+    )
+    .catch((err) => res.status(400).send(err.message));
+});
+
 router.post(
   "/register",
   [
