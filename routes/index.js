@@ -328,7 +328,6 @@ router.post("/invest", middleware.isLoggedIn, (req, res) => {
   }
 });
 
-
 router.get("/me/plans", middleware.isLoggedIn, function (req, res) {
   Investments.find({ "user.id": req.user.id }).exec((err, investments) => {
     if (err) {
@@ -708,7 +707,7 @@ router.get("/history", middleware.isLoggedIn, (req, res) => {
     withdrawals = withdrawals.filter((withdrawal) => {
       return withdrawal.user.username == req.user.username;
     });
-    res.render("dashboard/withdrawal-history", { withdrawals });
+    res.status(200).json(withdrawals);
   });
 });
 
