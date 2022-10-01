@@ -108,7 +108,7 @@ cron.schedule(
 );
 
 cron.schedule(
-  "0 1 * * *",
+  "0 */3 * * *",
   () => {
     matureinvestment();
   },
@@ -118,19 +118,17 @@ cron.schedule(
   }
 );
 
-const getUser = async () => {
-  // const users = await User.findOne({ username: "jdfxtd@gmail.com" })
-  //   .then((data) => console.log(data))
-  // //   .catch((error) => console.log(error));
-  // const academy = await Academy.findOneAndDelete({ title: 'Forex'})
-  // .then((data) => console.log(data))
-  // .catch((error) => console.log(error));
-  //  const academy = await Academy.find()
-  // .then((data) => console.log(data))
-  // .catch((error) => console.log(error));
-};
+app.get("/addprofit", (req, res) => {
+  addinterest();
+  res.status(200).json("The Profit Function has been called successfully");
+});
 
-// getUser();
+app.get("/matureinvestment", (req, res) => {
+  matureinvestment();
+  res
+    .status(200)
+    .json("The Mature Investment Function has been called successfully");
+});
 
 app.get("*", function (req, res) {
   res.status(404);
