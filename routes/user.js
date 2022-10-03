@@ -26,8 +26,9 @@ router.post("/delete", async (req, res, next) => {
 
 router.get("/getdeposits", async (req, res) => {
   const deposits = await Wallet.find();
+
   const deposit = deposits.filter((deposit) => {
-    return deposit.user.id.toString() === req.headers.userid.toString();
+    return deposit.user.id.toString() === req.headers.id.toString();
   });
 
   const api = "5PZGDEG-92T4C3S-GMG7BM6-KJ50PG7";
