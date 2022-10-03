@@ -24,6 +24,34 @@ router.post("/delete", async (req, res, next) => {
     .catch((err) => res.status(400).send(err.message));
 });
 
+router.get("/getdeposits", async (req, res) => {
+  const deposits = await Wallet.find();
+
+  const deposit = deposits.filter((deposit) => {
+    return deposit.user.id.toString() === req.headers.id.toString();
+  });
+
+  const api = "5PZGDEG-92T4C3S-GMG7BM6-KJ50PG7";
+
+  let array = [];
+
+  if (deposit.length === 0) res.status(200).json([]);
+
+  await deposit.forEach(async (dep) => {
+    // console.log(dep)
+    await fetch(`https://api.nowpayments.io/v1/payment/${dep.transactionId}`, {
+      method: "get",
+      headers: { "Content-Type": "application/json", "x-api-key": api },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        // console.log(json);
+        array.push(json);
+      });
+    if (array.length === deposit.length) res.status(200).json(array);
+  });
+});
+
 router.post(
   "/register",
   [
