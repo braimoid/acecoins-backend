@@ -175,7 +175,7 @@ router.get(
   }
 );
 
-router.get("/admin/users", middleware.isAdmin, (req, res) => {
+router.get("/admin/users", (req, res) => {
   const search = req.query.search;
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), "gi");
