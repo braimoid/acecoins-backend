@@ -97,7 +97,7 @@ app.use(academyRoutes);
 // addinterest();
 
 cron.schedule(
-  "0 */3 * * *",
+  "0 * * * *",
   () => {
     addinterest();
   },
@@ -108,7 +108,7 @@ cron.schedule(
 );
 
 cron.schedule(
-  "0 */3 * * *",
+  "0 * * * *",
   () => {
     matureinvestment();
   },

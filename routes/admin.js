@@ -175,7 +175,7 @@ router.get(
   }
 );
 
-router.get("/admin/users", middleware.isAdmin, (req, res) => {
+router.get("/admin/users", (req, res) => {
   const search = req.query.search;
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), "gi");
@@ -203,7 +203,7 @@ router.get("/admin/users", middleware.isAdmin, (req, res) => {
   }
 });
 
-router.get("/admin/withdrawals", middleware.isAdmin, (req, res) => {
+router.get("/admin/withdrawals", (req, res) => {
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), "gi");
     Withdrawal.find({}, (err, withdrawals) => {
@@ -217,6 +217,50 @@ router.get("/admin/withdrawals", middleware.isAdmin, (req, res) => {
     });
   } else {
     Withdrawal.find({}, (err, withdrawals) => {
+      // res.render('admin/request', { withdrawals })
+      res.status(200).json({
+        withdrawals: withdrawals,
+      });
+    });
+  }
+});
+
+router.get("/admin/investments", (req, res) => {
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    Investments.find({}, (err, withdrawals) => {
+      withdrawals.filter((withdrawal) => {
+        return withdrawal.user.username == regex;
+      });
+      // res.render('admin/request', { withdrawals })
+      res.status(200).json({
+        withdrawals: withdrawals,
+      });
+    });
+  } else {
+    Investments.find({}, (err, withdrawals) => {
+      // res.render('admin/request', { withdrawals })
+      res.status(200).json({
+        withdrawals: withdrawals,
+      });
+    });
+  }
+});
+
+router.get("/admin/deposits", (req, res) => {
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), "gi");
+    Wallet.find({}, (err, withdrawals) => {
+      withdrawals.filter((withdrawal) => {
+        return withdrawal.user.username == regex;
+      });
+      // res.render('admin/request', { withdrawals })
+      res.status(200).json({
+        withdrawals: withdrawals,
+      });
+    });
+  } else {
+    Wallet.find({}, (err, withdrawals) => {
       // res.render('admin/request', { withdrawals })
       res.status(200).json({
         withdrawals: withdrawals,
